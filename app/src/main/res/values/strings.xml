@@ -1,7 +1,7 @@
 <resources>
 
     <!--new Strings-->
-    <string name="app_name">SCANS(SOSAS)</string>
+    <string name="app_name"> SCANS(SOSAS) Sindhi </string>
 
     <!-- Strings related to login -->
     <string name="btnSync">Sync</string>
@@ -50,6 +50,7 @@
     <string name="tdhh"> Deceased Child </string>
 
     <string name="td04"> وفات ٿيندڙ ٻار جي عمر </string>
+    <string name="td04dd"> ڏينهن </string>
     <string name="td04mm"> مهينا </string>
     <string name="td04yy"> سال </string>
 
@@ -82,7 +83,7 @@
     <string name="td09h"> کليل باه يا ڌماڪو </string>
     <string name="td09i"> ڪا گرم شي لڳڻ يا سڙڻ </string>
 
-    <string name="td10"> ڇا توهان ٻار جي وفات کان پهريان ان کي ڪنهن اسپتال يا معالج کي ڏيکاريو؟ </string>
+    <string name="td10"> ڇا توهان ٻار جي وفات کان پهريان ان کي ڪنهن اسپتال يا معالج کي ڏيکاريو ؟ </string>
 
     <string name="td11"> (نالي) کي علاج لاءِ ڪٿي وٺي ويا ؟ </string>
     <string name="td11a"> گھر ۾ </string>
@@ -96,6 +97,7 @@
     <string name="td12b"> صرف دوا ڏني وئي </string>
     <string name="td12c"> وڏو آپريشن جنهن ۾ مريض کي بيهوش ڪيو ويندو آهي </string>
     <string name="td12d"> ننڍو آپريشن ملم پٽي ٽانڪا لڳائڻ دوا وغيره </string>
+    <string name="td12other"> ٻيو ڪجهه وضاحت ڪريو </string>
 
     <string name="td13"> ڪهڙن سببن جي ڪري ٻار کي ڪنهن اسپتال ۾ ڪنهن ڊاڪٽر يا نرس کي نه ڏيکاريو ويو يا ان جو آپريشن يا ملم پٽي نه ڪرائي وئي ؟ </string>
     <string name="td13a"> علاج لاءِ پئسا نه هئا </string>
@@ -104,6 +106,7 @@
     <string name="td13d"> خوف يا بي اعتباري </string>
     <string name="td13e"> سهولت، معالج، سامان موجود نه هئا </string>
     <string name="td13f"> علاج جي ضرورت نه هئي </string>
+    <string name="td13other"> ٻيو ڪجهه وضاحت ڪريو </string>
 
     <string name="td14"> ٻار جي وفات ڪٿي ٿي ؟ </string>
     <string name="td14a"> گھر ۾ </string>
@@ -111,10 +114,10 @@
     <string name="td14c"> اسپتال ويندي رستي ۾ </string>
     <string name="td14d"> ڪنهن ٻي جاءِ تي </string>
 
-    <string name="teh"> EYES اکيون </string>
+    <string name="teh"> اکيون </string>
     <string name="tehh"> EYES Problems </string>
 
-    <string name="te03"> توهان جي (ٻار جو نالو) کي ڪڏهن اکين ۾ زخم، سڙڻ، ڳڙ، نقص، نظرجو يا اهڙو ڪو ٻيو مسئلو ٿيو آهي؟ </string>
+    <string name="te03"> توهان جي (ٻار جو نالو) کي ڪڏهن اکين ۾ زخم، سڙڻ، ڳڙ، نقص، نظرجو يا اهڙو ڪو ٻيو مسئلو ٿيو آهي ؟ </string>
     <string name="te03a"> ھا </string>
     <string name="te03b"> نه </string>
 
@@ -171,9 +174,9 @@
     <string name="te08c"> گذريل ٻارنهن مهينن ۾ پر هڪ مهيني کان اڳ </string>
     <string name="te08d"> گذريل ٻارنهن مهينن کان اڳ ۾ </string>
 
-    <string name="te15"> ڇا ان جي هڏي ٽٽي پئي يا جوڙ مان نڪري وئي؟ </string>
+    <string name="te15"> ڇا ان جي هڏي ٽٽي پئي يا جوڙ مان نڪري وئي ؟ </string>
 
-    <string name="te09"> ڇا توهان ٻار کي علاج لاءِ ڪنهن اسپتال يا معالج کي ڏيکاريو؟ </string>
+    <string name="te09"> ڇا توهان ٻار کي علاج لاءِ ڪنهن اسپتال يا معالج کي ڏيکاريو ؟ </string>
 
     <string name="te10"> (نالي) کي علاج لاءِ ڪٿي وٺي ويا ؟ </string>
     <string name="te10a"> گھر ۾ </string>
@@ -197,6 +200,7 @@
     <string name="te12d"> خوف يا بي اعتباري </string>
     <string name="te12e"> سهولت، معالج، سامان موجود نه هئا </string>
     <string name="te12f"> علاج جي ضرورت نه هئي </string>
+    <string name="te12other"> ٻيو ڪجهه وضاحت ڪريو </string>
 
     <string name="te13"> ڇا اهو مسئلو يا معذوري اڃان تائين ٻار جي روزمره جي زندگيءَ تي اثر انداز ٿئي ٿي؟ (معذوري هڪ جسماني مسئلو آهي جيڪو توهان جي زندگيءَ کي متاثر ڪري ٿو، يا توهان کي روزمره جي ڪم ڪار ۾ ڏکيائن جو سبب بڻجي ٿي) </string>
     <string name="te13a"> حالت معذوري جهڙي نه آهي </string>
@@ -217,7 +221,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="yes"> ھا </string>
     <string name="no"> نه </string>
-    <string name="other">ٻيو ڪجهه</string>
+    <string name="other"> ٻيو ڪجهه </string>
 
     <!-- Strings related to Sections Below -->
     <string name="istatus1"> مکمل </string>
@@ -247,7 +251,7 @@
     <string name="te03a15">ڇا توهان جي (ٻار جو نالو) کي ڪڏهن ٽنگ جي بڪين، پنين ۾ زخم، سڙڻ، ڳڙ، نقص يا هڏي ٽٽڻ ڪنهن جانور جي چڪ پائڻ جو مسئلو، واقعو يا آپريشن ٿيو؟</string>
     <string name="te03a16">ڇا توهان جي (ٻار جو نالو) کي ڪڏهن ٽنگ جي رانن ۾ زخم، سڙڻ، ڳڙ، نقص يا هڏي ٽٽڻ ڪنهن جانور جي چڪ پائڻ جو مسئلو، واقعو يا آپريشن ٿيو؟</string>
     <!--End SOSAS Study te03 multiple text Strings-->
-    <string name="countAlertMsg">ڇا وڌل تعداد صحيح آهي؟</string>
+    <string name="countAlertMsg"> ڇا وڌل تعداد صحيح آهي ؟ </string>
     <string name="countYes">ها</string>
     <string name="countNo">نه</string>
 
