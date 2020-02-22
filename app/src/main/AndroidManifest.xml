@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.aku.hassannaqvi.uen_sosas">
+    package="edu.aku.hassannaqvi.uen_scans_sosas">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme1">
         <activity
             android:name=".ui.InfoActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ChildListActivity"
             android:screenOrientation="portrait"

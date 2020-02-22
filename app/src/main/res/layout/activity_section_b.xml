@@ -9,7 +9,7 @@
 
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.uen_sosas.ui.SectionBActivity" />
+            type="edu.aku.hassannaqvi.uen_scans_sosas.ui.SectionBActivity" />
 
     </data>
 

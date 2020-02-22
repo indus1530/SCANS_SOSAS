@@ -25,11 +25,11 @@ android {
         versionProps.store(versionPropsFile.newWriter(), null)
 
         defaultConfig {
-            applicationId "edu.aku.hassannaqvi.uen_sosas"
+            applicationId "edu.aku.hassannaqvi.uen_scans_sosas"
             minSdkVersion 21
             targetSdkVersion 29
             versionCode code
-            versionName "1.5"
+            versionName "0.1"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         }
     } else {
@@ -72,7 +72,7 @@ dependencies {
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
 
     //Ali mask
-    implementation 'com.github.AliAzaz:Edittext-Library:1.0.4'
+    implementation 'com.github.AliAzaz:Edittext-Library:2.0.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'com.balysv:material-ripple:1.0.2'
