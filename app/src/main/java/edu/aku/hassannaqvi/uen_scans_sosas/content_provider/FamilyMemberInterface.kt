@@ -1,6 +1,8 @@
 package edu.aku.hassannaqvi.uen_scans_sosas.content_provider
 
-interface FamilyMemberInterface {
+import android.database.Cursor
+
+class FamilyMemberInterface {
     companion object {
         @JvmStatic
         val COLUMN_ID: String
@@ -56,5 +58,28 @@ interface FamilyMemberInterface {
         @JvmStatic
         val COLUMN_SYNCED_DATE: String
             get() = "synced_date"
+
+        @JvmStatic
+        fun hydrate(cursor: Cursor): FamilyMemberContent? {
+            return FamilyMemberContent(
+                    cursor.getString(cursor.getColumnIndex(COLUMN_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_UID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_UUID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_LUID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_KISH_SELECTED)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLUSTERNO)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_HHNO)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_SERIAL_NO)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_NAME)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_RELATION_HH)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_AGE)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_NAME)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_SERIAL)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_GENDER)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_MARITAL)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_SD))
+
+            )
+        }
     }
 }

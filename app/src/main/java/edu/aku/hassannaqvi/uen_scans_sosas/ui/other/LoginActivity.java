@@ -71,6 +71,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
+import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.FamilyMemberContent;
 import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.FamilyMemberInterface;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AppInfo;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.TalukasContract;
@@ -80,7 +81,6 @@ import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.sync.SyncActivity;
 import edu.aku.hassannaqvi.uen_scans_sosas.utils.Util;
 
-import static edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp.cluster;
 import static edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants.DUMMY_CREDENTIALS;
 import static edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants.MINIMUM_DISTANCE_CHANGE_FOR_UPDATES;
 import static edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants.MINIMUM_TIME_BETWEEN_UPDATES;
@@ -223,48 +223,46 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Uri uri = Uri.parse("content://com.scans.familymem");
         String[] columns = {
                 FamilyMemberInterface.getCOLUMN_ID(),
-                SingleMember.COLUMN_UID,
-                SingleMember.COLUMN_UUID,
-                SingleMember.COLUMN_LUID,
-                SingleMember.COLUMN_KISH_SELECTED,
-                SingleMember.COLUMN_CLUSTERNO,
-                SingleMember.COLUMN_HHNO,
-                SingleMember.COLUMN_SERIAL_NO,
-                SingleMember.COLUMN_NAME,
-                SingleMember.COLUMN_RELATION_HH,
-                SingleMember.COLUMN_AGE,
-                SingleMember.COLUMN_MOTHER_NAME,
-                SingleMember.COLUMN_MOTHER_SERIAL,
-                SingleMember.COLUMN_GENDER,
-                SingleMember.COLUMN_MARITAL,
-                SingleMember.COLUMN_SD,
+                FamilyMemberInterface.getCOLUMN_UID(),
+                FamilyMemberInterface.getCOLUMN_UUID(),
+                FamilyMemberInterface.getCOLUMN_LUID(),
+                FamilyMemberInterface.getCOLUMN_KISH_SELECTED(),
+                FamilyMemberInterface.getCOLUMN_CLUSTERNO(),
+                FamilyMemberInterface.getCOLUMN_HHNO(),
+                FamilyMemberInterface.getCOLUMN_SERIAL_NO(),
+                FamilyMemberInterface.getCOLUMN_NAME(),
+                FamilyMemberInterface.getCOLUMN_RELATION_HH(),
+                FamilyMemberInterface.getCOLUMN_AGE(),
+                FamilyMemberInterface.getCOLUMN_MOTHER_NAME(),
+                FamilyMemberInterface.getCOLUMN_MOTHER_SERIAL(),
+                FamilyMemberInterface.getCOLUMN_GENDER(),
+                FamilyMemberInterface.getCOLUMN_MARITAL(),
+                FamilyMemberInterface.getCOLUMN_SD(),
 
         };
 
         String whereClause;
         String[] whereArgs;
-        if (mother != null) {
-            whereClause = SingleMember.COLUMN_CLUSTERNO + "=? AND " + SingleMember.COLUMN_HHNO + "=? AND "
-                    + SingleMember.COLUMN_KISH_SELECTED + "=? AND "
-                    + SingleMember.COLUMN_MOTHER_SERIAL + "=? AND " + SingleMember.COLUMN_UUID + "=? AND " + SingleMember.COLUMN_MOTHER_NAME + "=?";
-            whereArgs = new String[]{cluster, hhno, kishType, mother.getSerialno(), mother.getUuid(), mother.getName()};
+        String kishType = "1";
+        if (false) {
+            whereClause = FamilyMemberInterface.getCOLUMN_CLUSTERNO() + "=? AND " + FamilyMemberInterface.getCOLUMN_HHNO() + "=? AND "
+                    + FamilyMemberInterface.getCOLUMN_KISH_SELECTED() + "=? AND "
+                    + FamilyMemberInterface.getCOLUMN_MOTHER_SERIAL() + "=? AND " + FamilyMemberInterface.getCOLUMN_UUID() + "=? AND " + FamilyMemberInterface.getCOLUMN_MOTHER_NAME() + "=?";
+            whereArgs = new String[]{"5901", "0015-001", kishType, "mother.getgetSerialno()", "mother.getgetUuid()", "mother.getgetName()"};
         } else {
-            whereClause = SingleMember.COLUMN_CLUSTERNO + "=? AND " + SingleMember.COLUMN_HHNO + "=? AND "
-                    + SingleMember.COLUMN_KISH_SELECTED + "=? ";
-            whereArgs = new String[]{cluster, hhno, kishType};
+            whereClause = FamilyMemberInterface.getCOLUMN_CLUSTERNO() + "=? AND " + FamilyMemberInterface.getCOLUMN_HHNO() + "=? AND "
+                    + FamilyMemberInterface.getCOLUMN_KISH_SELECTED() + "=? ";
+            whereArgs = new String[]{"5901", "0015-001", kishType};
         }
-        String groupBy = null;
-        String having = null;
-
-        String orderBy = SingleMember.COLUMN_ID + " ASC";
+        String orderBy = FamilyMemberInterface.getCOLUMN_ID() + " ASC";
 
         ContentResolver resolver = getContentResolver();
-        Cursor cursor = resolver.query(uri, null, )
-
-
-
-
-
+        Cursor cursor = resolver.query(uri, columns, whereClause, whereArgs, orderBy);
+        FamilyMemberContent fmc;
+        while (cursor.moveToNext()) {
+            fmc = FamilyMemberInterface.hydrate(cursor);
+        }
+        cursor.close();
 
     }
 
