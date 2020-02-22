@@ -247,7 +247,7 @@
     <string name="te03a15">ڇا توهان جي (ٻار جو نالو) کي ڪڏهن ٽنگ جي بڪين، پنين ۾ زخم، سڙڻ، ڳڙ، نقص يا هڏي ٽٽڻ ڪنهن جانور جي چڪ پائڻ جو مسئلو، واقعو يا آپريشن ٿيو؟</string>
     <string name="te03a16">ڇا توهان جي (ٻار جو نالو) کي ڪڏهن ٽنگ جي رانن ۾ زخم، سڙڻ، ڳڙ، نقص يا هڏي ٽٽڻ ڪنهن جانور جي چڪ پائڻ جو مسئلو، واقعو يا آپريشن ٿيو؟</string>
     <!--End SOSAS Study te03 multiple text Strings-->
-    <string name="countAlertMsg">ڇا وڌل تعداد صحيح آهي؟</string>
+    <string name="countAlertMsg"> ڇا وڌل تعداد صحيح آهي ؟ </string>
     <string name="countYes">ها</string>
     <string name="countNo">نه</string>
 
