@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--new Strings-->
+    <string name="app_name"> SCANS(SOSAS) Urdu </string>
+
+    <!-- Strings related to login -->
+    <string name="btnSync">Sync</string>
+    <string name="btnUpload">Upload</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
     <string name="eye"> آنکھیں </string>
     <string name="ear"> کان </string>
     <string name="face"> چہرہ </string>
@@ -96,7 +109,7 @@
     <string name="te05e"> پیدائشی نقص </string>
     <string name="te05f"> حادثاتی نقص </string>
     <string name="te05g"> اندھا پن </string>
-    <string name="te05h"> نظرمیں کمی </string>
+    <string name="te05h"> نظر میں کمی </string>
     <string name="te05i"> بہراپن </string>
     <string name="te05j"> جسم میں کوئی سوجن یا گلٹی </string>
     <string name="te05k"> سانس کی نالی میں کسی چیز کا پھنسنا </string>
@@ -110,10 +123,12 @@
     <string name="te05s"> پیشاب میں خون آنا </string>
     <string name="te05t">  </string>
     <string name="te05u"> زخم سے خون یا پیپ خارج ہونا </string>
-    <string name="te05i"> پیشاب میں رکاوٹ </string>
+
+    <!--<string name="te05i"> پیشاب میں رکاوٹ </string>
     <string name="te05j"> گردوں میں پتھری </string>
     <string name="te05k"> پاخانے میں خون آنا </string>
-    <string name="te05l"> پیشاب کی نالی سے خون آنا </string>
+    <string name="te05l"> پیشاب کی نالی سے خون آنا </string>-->
+
     <string name="te06"> کیا مسئلہ کسی چوٹ یا حادثے کے بعد شروع ہوا؟ </string>
     <string name="te07"> اگر ہاں، توکس قسم کا حادثہ تھا ؟ </string>
     <string name="te07a"> کار، ٹرک یا بس کا حادثہ </string>
@@ -187,11 +202,14 @@
     <string name="te03a14">  </string>
     <string name="te03a15">  </string>
     <string name="te03a16">  </string>
+
     <string name="countAlertMsg">  </string>
     <string name="countYes"> ہاں </string>
     <string name="countNo"> نہیں </string>
     <string name="ext"> جسم کے نچلے حصے </string>
+
     <string name="td15">  </string>
+
     <string name="td16">  </string>
     <string name="td16a"> انگلیاں </string>
     <string name="td16b"> انگوٹھا/ہاتھ </string>
@@ -200,6 +218,9 @@
     <string name="td16e"> پیر </string>
     <string name="td16f"> ٹانگ کا نچلا حصہ </string>
     <string name="td16g"> جانگھیں </string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="ed_letterOnly">QWERTYUIOPASDFGHJKLZXCVBNM qwertyuiopasdfghjklzxcvbnm</string>
 
 
 </resources>
