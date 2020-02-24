@@ -17,12 +17,8 @@ import java.net.URL;
 import java.util.List;
 
 import edu.aku.hassannaqvi.uen_scans_sosas.adapter.SyncListAdapter;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AreasContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.TalukasContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UCsContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UsersContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VersionAppContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VillagesContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.otherClasses.SyncModel;
@@ -56,23 +52,11 @@ public class GetAllData extends AsyncTask<String, String, String> {
         this.list = list;
         TAG = "Get" + syncClass;
         switch (syncClass) {
-            case "Talukas":
+            case "Users":
                 position = 0;
                 break;
-            case "UCs":
-                position = 1;
-                break;
-            case "Areas":
-                position = 2;
-                break;
-            case "Villages":
-                position = 3;
-                break;
-            case "Users":
-                position = 4;
-                break;
             case "VersionApp":
-                position = 5;
+                position = 1;
                 break;
         }
         list.get(position).settableName(syncClass);
@@ -96,23 +80,11 @@ public class GetAllData extends AsyncTask<String, String, String> {
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
         switch (values[0]) {
-            case "Talukas":
+            case "Users":
                 position = 0;
                 break;
-            case "UCs":
-                position = 1;
-                break;
-            case "Areas":
-                position = 2;
-                break;
-            case "Villages":
-                position = 3;
-                break;
-            case "Users":
-                position = 4;
-                break;
             case "VersionApp":
-                position = 5;
+                position = 1;
                 break;
         }
         list.get(position).setstatus("Syncing");
@@ -129,29 +101,13 @@ public class GetAllData extends AsyncTask<String, String, String> {
         URL url = null;
         try {
             switch (syncClass) {
-                case "Talukas":
-                    url = new URL(MainApp._HOST_URL + TalukasContract.singleTalukas._URI);
-                    position = 0;
-                    break;
-                case "UCs":
-                    url = new URL(MainApp._HOST_URL + UCsContract.singleUCs._URI);
-                    position = 1;
-                    break;
-                case "Areas":
-                    url = new URL(MainApp._HOST_URL + AreasContract.singleAreas._URI);
-                    position = 2;
-                    break;
-                case "Villages":
-                    url = new URL(MainApp._HOST_URL + VillagesContract.singleVillage._URI);
-                    position = 3;
-                    break;
                 case "Users":
                     url = new URL(MainApp._HOST_URL + UsersContract.singleUser._URI);
-                    position = 4;
+                    position = 0;
                     break;
                 case "VersionApp":
                     url = new URL(MainApp._UPDATE_URL + VersionAppContract.VersionAppTable._URI);
-                    position = 5;
+                    position = 1;
                     break;
 
             }
@@ -221,30 +177,13 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     JSONArray jsonArray = new JSONArray(json);
 
                     switch (syncClass) {
-
-                        case "Talukas":
-                            db.syncTalukas(jsonArray);
-                            position = 0;
-                            break;
-                        case "UCs":
-                            db.syncUCs(jsonArray);
-                            position = 1;
-                            break;
-                        case "Areas":
-                            db.syncAreas(jsonArray);
-                            position = 2;
-                            break;
-                        case "Villages":
-                            db.syncVillages(jsonArray);
-                            position = 3;
-                            break;
                         case "Users":
                             db.syncUser(jsonArray);
-                            position = 4;
+                            position = 0;
                             break;
                         case "VersionApp":
                             db.syncVersionApp(jsonArray);
-                            position = 5;
+                            position = 1;
                             break;
                     }
 

@@ -351,7 +351,7 @@ public class SyncActivity extends AppCompatActivity {
 
                     new SyncDevice(SyncActivity.this).execute();
 
-                    Toast.makeText(SyncActivity.this, "Sync Talukas", Toast.LENGTH_SHORT).show();
+                    /*Toast.makeText(SyncActivity.this, "Sync Talukas", Toast.LENGTH_SHORT).show();
 
                     if (listActivityCreated) {
                         model = new SyncModel();
@@ -387,7 +387,7 @@ public class SyncActivity extends AppCompatActivity {
                         model.setstatusID(0);
                         list.add(model);
                     }
-                    new GetAllData(mContext, "Villages", syncListAdapter, list).execute();
+                    new GetAllData(mContext, "Villages", syncListAdapter, list).execute();*/
 
 //                   getting User
                     Toast.makeText(SyncActivity.this, "Sync Users", Toast.LENGTH_SHORT).show();

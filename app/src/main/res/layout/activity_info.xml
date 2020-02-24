@@ -46,6 +46,7 @@
                             style="@style/i_textview"
                             android:layout_width="0dp"
                             android:layout_weight="1"
+                            android:gravity="center"
                             android:text="@string/ta01" />
 
                         <EditText
