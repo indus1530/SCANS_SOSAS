@@ -82,6 +82,10 @@
     </style>
     ​
 
+    <style name="EditTextNum" parent="@style/textInput">
+        <item name="android:inputType">number</item>
+    </style>
+
     <style name="i_textview">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
