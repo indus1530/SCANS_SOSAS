@@ -1,0 +1,77 @@
+package edu.aku.hassannaqvi.uen_scans_sosas.content_provider
+
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import edu.aku.hassannaqvi.uen_scans_sosas.contracts.FamilyMembersContract
+import edu.aku.hassannaqvi.uen_scans_sosas.ui.InfoActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
+
+class DataFactory(private val context: Context, private val cluster_no: String, private val hhno: String) {
+
+    init {
+        GlobalScope.async { populateList() }
+    }
+
+    private suspend fun populateList() = withContext(Dispatchers.IO) {
+        var indexCursor: Cursor? = null
+        val index = async {
+            indexCursor = setContent(kishType = 1)
+        }
+        if (index.await().let { true }) {
+            if (indexCursor != null) {
+                if (indexCursor!!.count > 0) {
+                    while (indexCursor!!.moveToNext()) {
+                        val fmc = FamilyMembersContract()
+                        InfoActivity.motherList.add(fmc.hydrateContentData(indexCursor))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setContent(fmc: FamilyMemberContent? = null, kishType: Int): Cursor? {
+        val uri = Uri.parse("content://com.scans.familymem")
+        val columns = arrayOf(
+                FamilyMemberInterface.COLUMN_ID,
+                FamilyMemberInterface.COLUMN_UID,
+                FamilyMemberInterface.COLUMN_UUID,
+                FamilyMemberInterface.COLUMN_LUID,
+                FamilyMemberInterface.COLUMN_KISH_SELECTED,
+                FamilyMemberInterface.COLUMN_CLUSTERNO,
+                FamilyMemberInterface.COLUMN_HHNO,
+                FamilyMemberInterface.COLUMN_SERIAL_NO,
+                FamilyMemberInterface.COLUMN_NAME,
+                FamilyMemberInterface.COLUMN_RELATION_HH,
+                FamilyMemberInterface.COLUMN_AGE,
+                FamilyMemberInterface.COLUMN_MOTHER_NAME,
+                FamilyMemberInterface.COLUMN_MOTHER_SERIAL,
+                FamilyMemberInterface.COLUMN_GENDER,
+                FamilyMemberInterface.COLUMN_MARITAL,
+                FamilyMemberInterface.COLUMN_SD)
+
+        val whereClause: String
+        val whereArgs: Array<String>
+        if (kishType == 2) {
+            whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
+                    + FamilyMemberInterface.COLUMN_KISH_SELECTED + "=? AND "
+                    + FamilyMemberInterface.COLUMN_MOTHER_SERIAL + "=? AND " + FamilyMemberInterface.COLUMN_UUID + "=? AND " + FamilyMemberInterface.COLUMN_MOTHER_NAME + "=?")
+            whereArgs = arrayOf(cluster_no, hhno, kishType.toString(), fmc!!.serialno, fmc.uuid, fmc.name)
+        } else {
+            whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
+                    + FamilyMemberInterface.COLUMN_KISH_SELECTED + "=? ")
+            whereArgs = arrayOf(cluster_no, hhno, kishType.toString())
+        }
+        val orderBy = "${FamilyMemberInterface.COLUMN_ID} ASC"
+
+        val resolver = context.contentResolver
+
+        return resolver.query(uri, columns, whereClause, whereArgs, orderBy)
+
+
+    }
+
+}

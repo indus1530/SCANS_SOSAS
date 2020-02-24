@@ -7,7 +7,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -67,8 +66,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
-import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.FamilyMemberContent;
-import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.FamilyMemberInterface;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AppInfo;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.TalukasContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UCsContract;
@@ -216,7 +213,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
 
 
-        Uri uri = Uri.parse("content://com.scans.familymem");
+       /* Uri uri = Uri.parse("content://com.scans.familymem");
         String[] columns = {
                 FamilyMemberInterface.getCOLUMN_ID(),
                 FamilyMemberInterface.getCOLUMN_UID(),
@@ -260,7 +257,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         while (cursor.moveToNext()) {
             fmc = FamilyMemberInterface.hydrate(cursor);
         }
-        cursor.close();
+        cursor.close();*/
 
     }
 

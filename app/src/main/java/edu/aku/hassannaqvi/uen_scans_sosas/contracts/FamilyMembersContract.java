@@ -8,6 +8,8 @@ import android.provider.BaseColumns;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.FamilyMemberInterface;
+
 public class FamilyMembersContract implements Parcelable {
     private String uid = "";
     private String uuid = "";
@@ -80,6 +82,19 @@ public class FamilyMembersContract implements Parcelable {
         this.type = cursor.getString(cursor.getColumnIndex(singleMember.COLUMN_TYPE));
 
 
+        return this;
+    }
+
+    public FamilyMembersContract hydrateContentData(Cursor cursor) {
+        this.uid = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_UID()));
+        this.uuid = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_UUID()));
+        this.age = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_AGE()));
+        this.clusterno = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_CLUSTERNO()));
+        this.hhno = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_HHNO()));
+        this.motherid = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_MOTHER_SERIAL()));
+        this.name = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_NAME()));
+        this.serialno = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_SERIAL_NO()));
+        this.motherName = cursor.getString(cursor.getColumnIndex(FamilyMemberInterface.getCOLUMN_MOTHER_NAME()));
         return this;
     }
 
