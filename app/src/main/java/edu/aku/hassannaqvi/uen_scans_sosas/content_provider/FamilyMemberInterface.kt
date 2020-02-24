@@ -5,59 +5,37 @@ import android.database.Cursor
 class FamilyMemberInterface {
     companion object {
         @JvmStatic
-        val COLUMN_ID: String
-            get() = "_id"
+        val COLUMN_ID = "_id"
         @JvmStatic
-        val COLUMN_UID: String
-            get() = "_uid"
+        val COLUMN_UID = "_uid"
         @JvmStatic
-        val COLUMN_UUID: String
-            get() = "_uuid"
+        val COLUMN_UUID = "_uuid"
         @JvmStatic
-        val COLUMN_LUID: String
-            get() = "_luid"
+        val COLUMN_LUID = "_luid"
         @JvmStatic
-        val COLUMN_AGE: String
-            get() = "age"
+        val COLUMN_AGE = "age"
         @JvmStatic
-        val COLUMN_CLUSTERNO: String
-            get() = "clusterno"
+        val COLUMN_CLUSTERNO = "clusterno"
         @JvmStatic
-        val COLUMN_HHNO: String
-            get() = "hhno"
+        val COLUMN_HHNO = "hhno"
         @JvmStatic
-        val COLUMN_RELATION_HH: String
-            get() = "relHH"
+        val COLUMN_RELATION_HH = "relHH"
         @JvmStatic
-        val COLUMN_KISH_SELECTED: String
-            get() = "kishSelected"
+        val COLUMN_KISH_SELECTED = "kishSelected"
         @JvmStatic
-        val COLUMN_NAME: String
-            get() = "name"
+        val COLUMN_NAME = "name"
         @JvmStatic
-        val COLUMN_SERIAL_NO: String
-            get() = "serial_no"
+        val COLUMN_SERIAL_NO = "serial_no"
         @JvmStatic
-        val COLUMN_MOTHER_NAME: String
-            get() = "mother_name"
+        val COLUMN_MOTHER_NAME = "mother_name"
         @JvmStatic
-        val COLUMN_MOTHER_SERIAL: String
-            get() = "mother_serial"
+        val COLUMN_MOTHER_SERIAL = "mother_serial"
         @JvmStatic
-        val COLUMN_GENDER: String
-            get() = "gender"
+        val COLUMN_GENDER = "gender"
         @JvmStatic
-        val COLUMN_MARITAL: String
-            get() = "marital"
+        val COLUMN_MARITAL = "marital"
         @JvmStatic
-        val COLUMN_SD: String
-            get() = "sD"
-        @JvmStatic
-        val COLUMN_SYNCED: String
-            get() = "synced"
-        @JvmStatic
-        val COLUMN_SYNCED_DATE: String
-            get() = "synced_date"
+        val COLUMN_SD = "sD"
 
         @JvmStatic
         fun hydrate(cursor: Cursor): FamilyMemberContent? {
@@ -73,8 +51,8 @@ class FamilyMemberInterface {
                     cursor.getString(cursor.getColumnIndex(COLUMN_NAME)),
                     cursor.getString(cursor.getColumnIndex(COLUMN_RELATION_HH)),
                     cursor.getString(cursor.getColumnIndex(COLUMN_AGE)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_NAME)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_SERIAL)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_NAME))?.let { it } ?: "",
+                    cursor.getString(cursor.getColumnIndex(COLUMN_MOTHER_SERIAL))?.let { it } ?: "",
                     cursor.getString(cursor.getColumnIndex(COLUMN_GENDER)),
                     cursor.getString(cursor.getColumnIndex(COLUMN_MARITAL)),
                     cursor.getString(cursor.getColumnIndex(COLUMN_SD))
