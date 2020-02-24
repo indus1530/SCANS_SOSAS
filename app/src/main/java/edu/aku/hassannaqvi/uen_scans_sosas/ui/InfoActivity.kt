@@ -8,8 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -80,7 +78,7 @@ class InfoActivity : AppCompatActivity() {
             areaMap[item.area] = item.areacode
         }
 
-        bi.areaSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, areaNames)
+        /*bi.areaSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, areaNames)
         bi.areaSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -120,7 +118,7 @@ class InfoActivity : AppCompatActivity() {
 
             }
 
-        }
+        }*/
 
         bi.hhName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

@@ -51,9 +51,6 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
-import org.angmarch.views.NiceSpinner;
-import org.angmarch.views.OnSpinnerItemSelectedListener;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -63,7 +60,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -121,11 +117,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @BindView(R.id.email_sign_in_button)
     Button mEmailSignInButton;
 
-    @BindView(R.id.spTaluka)
+    /*@BindView(R.id.spTaluka)
     NiceSpinner spTaluka;
 
     @BindView(R.id.spUCs)
-    NiceSpinner spUCs;
+    NiceSpinner spUCs;*/
 
 
     @BindView(R.id.syncData)
@@ -195,12 +191,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (spTaluka.getSelectedIndex() != 0 && spUCs.getSelectedIndex() != 0) {
+                attemptLogin();
+                /*if (spTaluka.getSelectedIndex() != 0 && spUCs.getSelectedIndex() != 0) {
                     attemptLogin();
                 } else {
                     Toast.makeText(LoginActivity.this, "Please Sync Data Or Select UCs and Taluka before login", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
 
             }
@@ -528,7 +524,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @Override
     protected void onStart() {
         super.onStart();
-        populateSpinner(this);
+        //populateSpinner(this);
     }
 
     public void loadIMEI() {
@@ -761,7 +757,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
     }
 
-    public void populateSpinner(Context context) {
+    /*public void populateSpinner(Context context) {
 
         final Context mContext = context;
 
@@ -810,7 +806,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-    }
+    }*/
 
     /**
      * Represents an asynchronous login/registration task used to authenticate

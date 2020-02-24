@@ -324,7 +324,7 @@
 
                 </LinearLayout>
 
-                <org.angmarch.views.NiceSpinner
+                <!--<org.angmarch.views.NiceSpinner
                     android:id="@+id/spTaluka"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -336,10 +336,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="UC NAMES" />
+                    android:text="UC NAMES" />-->
 
                 <Button
-
                     android:id="@+id/email_sign_in_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
@@ -349,11 +348,11 @@
                     android:padding="16dp"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
 
             <TextView
-
                 android:id="@+id/syncData"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
@@ -362,9 +361,8 @@
                 android:gravity="center"
                 android:padding="16dp"
                 android:text="Always sync data before first use. Click Here to SYNC"
-                android:textColor="@color/gray"
+                android:textColor="@color/darkRed"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:id="@+id/txtinstalldate"
@@ -376,5 +374,7 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>
