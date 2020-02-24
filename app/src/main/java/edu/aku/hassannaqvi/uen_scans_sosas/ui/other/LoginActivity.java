@@ -259,6 +259,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         ContentResolver resolver = getContentResolver();
         Cursor cursor = resolver.query(uri, columns, whereClause, whereArgs, orderBy);
         FamilyMemberContent fmc;
+        if (cursor == null) return;
+        if (cursor.getCount() == 0) return;
         while (cursor.moveToNext()) {
             fmc = FamilyMemberInterface.hydrate(cursor);
         }
