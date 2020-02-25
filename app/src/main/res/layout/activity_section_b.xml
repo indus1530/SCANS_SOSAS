@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/textView3Head"
+                style="@style/HeadingTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tdh" />
@@ -37,28 +37,29 @@
                 android:id="@+id/td01cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout_view">
 
                     <TextView
-                        style="@style/labels"
+                        style="@style/i_textview"
                         android:text="@string/td01" />
 
                     <RadioGroup
                         android:id="@+id/td01"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/td01a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/td01b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/no" />
 
                     </RadioGroup>
@@ -75,29 +76,22 @@
 
                 <LinearLayout
                     android:id="@+id/td02"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/linearlayout_view">
 
                     <TextView
                         style="@style/labels"
                         android:text="@string/td02" />
 
-
                     <EditText
                         android:id="@+id/td02a"
-                        style="@style/textInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/EditTextNum"
                         android:hint="@string/td02a"
-                        android:inputType="number"
-                        android:digits="123456789"
-                        android:maxLength="1"
-                        android:tag="td02a" />
+                        android:maxLength="1" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
