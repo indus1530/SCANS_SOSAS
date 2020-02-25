@@ -87,7 +87,7 @@
                         android:text="@string/td02" />
 
                     <LinearLayout
-                        style="@style/linearlayout_view"
+                        style="@style/linearlayout"
                         android:orientation="horizontal">
 
                         <EditText
@@ -116,7 +116,7 @@
                 style="@style/cardView">
 
                 <LinearLayout
-                    style="@style/linearlayout_view"
+                    style="@style/linearlayout"
                     android:orientation="horizontal">
 
                     <TextView
@@ -181,7 +181,7 @@
                 android:id="@+id/td07cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -242,7 +242,7 @@
                 android:id="@+id/td08cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -278,7 +278,7 @@
                 android:id="@+id/td09cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -344,7 +344,7 @@
                 android:id="@+id/td10cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -380,7 +380,7 @@
                 android:id="@+id/td11cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -426,7 +426,7 @@
                 android:id="@+id/td12cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -467,7 +467,7 @@
                 android:id="@+id/td13cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -530,7 +530,7 @@
                 android:id="@+id/td14cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"

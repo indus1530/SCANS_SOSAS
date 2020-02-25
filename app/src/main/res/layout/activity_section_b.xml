@@ -37,7 +37,7 @@
                 android:id="@+id/td01cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -76,7 +76,7 @@
 
                 <LinearLayout
                     android:id="@+id/td02"
-                    style="@style/linearlayout_view">
+                    style="@style/linearlayout">
 
                     <TextView
                         style="@style/labels"

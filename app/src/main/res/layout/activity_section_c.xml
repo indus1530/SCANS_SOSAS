@@ -22,7 +22,7 @@
 
         <LinearLayout
             android:id="@+id/ll03"
-            style="@style/linearlayout_view">
+            style="@style/linearlayout">
 
             <TextView
                 android:id="@+id/headingTitle"
@@ -37,7 +37,7 @@
                 android:id="@+id/te03cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         android:id="@+id/te03a1"
@@ -77,7 +77,7 @@
 
                 <LinearLayout
                     android:id="@+id/te04sos"
-                    style="@style/linearlayout_view"
+                    style="@style/linearlayout"
                     android:orientation="horizontal">
 
                     <TextView
@@ -104,7 +104,7 @@
 
 
             <LinearLayout
-                style="@style/linearlayout_view"
+                style="@style/linearlayout"
                 android:orientation="horizontal">
 
                 <Button

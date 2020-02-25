@@ -15,17 +15,15 @@
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/i_scrollview"
         android:background="@drawable/sosas_bg"
         android:layoutDirection="rtl"
-        android:padding="16dp">
+        android:padding="14dp"
+        android:textDirection="rtl">
 
         <LinearLayout
             android:id="@+id/ll02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearlayout">
 
             <TextView
                 style="@style/HeadingTitle"
@@ -39,22 +37,21 @@
                 style="@style/cardView">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/linearlayout"
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/i_textview"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:text="@string/td02b" />
 
                     <EditText
                         android:id="@+id/td02b"
-                        style="@style/textInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="@string/ed_letterOnly"
-                        android:hint="@string/td02b"
-                        android:tag="td02b" />
+                        style="@style/EditTextAlpha"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="@string/name" />
 
                 </LinearLayout>
 
@@ -66,32 +63,20 @@
                 style="@style/cardView">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/linearlayout"
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/i_textview"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
                         android:text="@string/td04" />
-
-                    <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-                        android:id="@+id/td04aodc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_weight="70"
-                        android:focusable="false"
-                        android:hint="DD-MM-YYYY"
-                        android:textColor="@android:color/black"
-                        app:dateFormat="dd-MM-yyyy"
-                        app:maxDate="CR_DATE" />-->
 
                     <com.edittextpicker.aliazaz.EditTextPicker
                         android:id="@+id/td04mm"
-                        style="@style/textInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
+                        style="@style/EditTextNum"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:hint="@string/td04mm"
                         android:maxLength="2"
                         app:maxValue="11"
@@ -101,10 +86,9 @@
 
                     <com.edittextpicker.aliazaz.EditTextPicker
                         android:id="@+id/td04yy"
-                        style="@style/textInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
+                        style="@style/EditTextNum"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:hint="@string/td04yy"
                         android:maxLength="1"
                         app:maxValue="5"
@@ -121,10 +105,7 @@
                 android:id="@+id/td05cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -132,17 +113,21 @@
 
                     <RadioGroup
                         android:id="@+id/td05"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/td05a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/td05a" />
 
                         <RadioButton
                             android:id="@+id/td05b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/td05b" />
 
                     </RadioGroup>
@@ -157,63 +142,24 @@
                 style="@style/cardView">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/linearlayout"
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/i_textview"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:text="@string/td06" />
 
                     <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
                         android:id="@+id/td06dod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_weight="70"
+                        style="@style/EditTextNum"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:focusable="false"
                         android:hint="DD-MM-YYYY"
-                        android:textColor="@android:color/black"
                         app:dateFormat="dd-MM-yyyy"
                         app:maxDate="CR_DATE" />
-
-                    <!--    <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/td06dd"
-                            style="@style/textInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:hint="@string/day"
-                            android:maxLength="2"
-                            app:maxValue="31"
-                            app:minValue="1"
-                            app:required="true"
-                            app:type="range"/>
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/td06mm"
-                            style="@style/textInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:hint="@string/month"
-                            android:maxLength="2"
-                            app:maxValue="12"
-                            app:minValue="1"
-                            app:required="true"
-                            app:type="range"/>
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/td06yy"
-                            style="@style/textInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:hint="@string/year"
-                            android:maxLength="4"
-                            app:maxValue="2020"
-                            app:minValue="1990"
-                            app:type="range"/>-->
 
                 </LinearLayout>
 
@@ -224,10 +170,7 @@
                 android:id="@+id/td07cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -235,8 +178,7 @@
 
                     <RadioGroup
                         android:id="@+id/td07"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/td07a"
@@ -287,9 +229,7 @@
             <!--Radio Button Td08 & Td09-->
             <LinearLayout
                 android:id="@+id/llsos02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                style="@style/linearlayout"
                 android:visibility='@{td07h.checked ? View.GONE : View.VISIBLE }'>
 
                 <!--Radio Button Td08-->
@@ -297,10 +237,7 @@
                     android:id="@+id/td08cv"
                     style="@style/cardView">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/linearlayout">
 
                         <TextView
                             style="@style/i_textview"
@@ -308,17 +245,21 @@
 
                         <RadioGroup
                             android:id="@+id/td08"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            style="@style/radiogroup"
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/td08a"
                                 style="@style/radiobutton"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/td08b"
                                 style="@style/radiobutton"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:text="@string/no" />
 
                         </RadioGroup>
@@ -333,10 +274,7 @@
                     style="@style/cardView"
                     android:visibility='@{td08b.checked ? View.GONE : View.VISIBLE }'>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/linearlayout">
 
                         <TextView
                             style="@style/i_textview"
@@ -344,8 +282,7 @@
 
                         <RadioGroup
                             android:id="@+id/td09"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            style="@style/radiogroup">
 
                             <RadioButton
                                 android:id="@+id/td09a"
@@ -405,10 +342,7 @@
                 android:id="@+id/td10cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -416,17 +350,21 @@
 
                     <RadioGroup
                         android:id="@+id/td10"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/td10a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/td10b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/no" />
 
                     </RadioGroup>
@@ -438,9 +376,7 @@
             <!--Radio Button Td11 & Td12-->
             <LinearLayout
                 android:id="@+id/llsos03"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                style="@style/linearlayout"
                 android:visibility='@{td10b.checked ? View.GONE : View.VISIBLE }'>
 
                 <!--Radio Button Td11-->
@@ -448,10 +384,7 @@
                     android:id="@+id/td11cv"
                     style="@style/cardView">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/linearlayout">
 
                         <TextView
                             style="@style/i_textview"
@@ -459,8 +392,7 @@
 
                         <RadioGroup
                             android:id="@+id/td11"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            style="@style/radiogroup">
 
                             <RadioButton
                                 android:id="@+id/td11a"
@@ -498,10 +430,7 @@
                     android:id="@+id/td12cv"
                     style="@style/cardView">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/linearlayout">
 
                         <TextView
                             style="@style/i_textview"
@@ -509,8 +438,7 @@
 
                         <RadioGroup
                             android:id="@+id/td12"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            style="@style/radiogroup">
 
                             <RadioButton
                                 android:id="@+id/td12a"
@@ -546,10 +474,7 @@
                 style="@style/cardView"
                 android:visibility="@{td12b.checked || td12c.checked || td12d.checked ? View.GONE : View.VISIBLE}">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -557,8 +482,7 @@
 
                     <RadioGroup
                         android:id="@+id/td13"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/td13a"
@@ -597,12 +521,8 @@
 
                         <EditText
                             android:id="@+id/td1396x"
-                            style="@style/textInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:digits="@string/ed_letterOnly"
-                            android:hint="@string/other"
-                            android:tag="td1396"
+                            style="@style/EditTextAlpha"
+                            android:hint="@string/specify"
                             android:text='@{td1396.checked? td1396x.getText().toString() : ""}'
                             android:visibility='@{td1396.checked? View.VISIBLE : View.GONE}' />
 
@@ -617,10 +537,7 @@
                 android:id="@+id/td14cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -628,8 +545,7 @@
 
                     <RadioGroup
                         android:id="@+id/td14"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/td14a"
@@ -656,6 +572,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
 
             <!--Buttons-->
             <LinearLayout

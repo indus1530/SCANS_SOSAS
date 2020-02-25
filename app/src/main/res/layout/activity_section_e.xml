@@ -14,17 +14,15 @@
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/i_scrollview"
         android:background="@drawable/sosas_bg"
         android:layoutDirection="rtl"
+        android:textDirection="rtl"
         android:padding="16dp">
 
         <LinearLayout
             android:id="@+id/ll04"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearlayout">
 
             <TextView
                 android:id="@+id/heading"
@@ -38,21 +36,15 @@
                 android:id="@+id/te05cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
                         android:text="@string/te05" />
 
-
                     <RadioGroup
                         android:id="@+id/te05"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/te05a"
@@ -170,10 +162,7 @@
                 android:id="@+id/te06cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -181,17 +170,21 @@
 
                     <RadioGroup
                         android:id="@+id/te06"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/te06a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/te06b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/no" />
 
                     </RadioGroup>
@@ -206,9 +199,7 @@
                 style="@style/cardView">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    style="@style/linearlayout"
                     android:visibility='@{te06b.checked ? View.GONE : View.VISIBLE }'>
 
                     <TextView
@@ -217,8 +208,7 @@
 
                     <RadioGroup
                         android:id="@+id/te07"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/te07a"
@@ -276,10 +266,7 @@
                 android:id="@+id/te08cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -287,8 +274,7 @@
 
                     <RadioGroup
                         android:id="@+id/te08"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup">
 
                         <RadioButton
                             android:id="@+id/te08a"
@@ -321,10 +307,7 @@
                 android:id="@+id/te15cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -332,17 +315,21 @@
 
                     <RadioGroup
                         android:id="@+id/te15"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/te15a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/te15b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/no" />
 
                     </RadioGroup>

@@ -89,6 +89,13 @@
         <item name="android:padding">1dp</item>
     </style>
 
+
+    <style name="linearlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <style name="textInput" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -175,11 +182,10 @@
         <item name="android:background">#d6d6d6</item>
         <item name="android:textSize">24sp</item>
         <item name="android:typeface">serif</item>
-
     </style>
 
     <style name="radiobutton" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/white</item>

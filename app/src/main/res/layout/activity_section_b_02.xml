@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:id="@+id/ll03"
-            style="@style/linearlayout_view">
+            style="@style/linearlayout">
 
             <TextView
                 android:id="@+id/headingTitle"
@@ -35,7 +35,7 @@
                 android:id="@+id/te03cv"
                 style="@style/cardView">
 
-                <LinearLayout style="@style/linearlayout_view">
+                <LinearLayout style="@style/linearlayout">
 
                     <TextView
                         android:id="@+id/te03a1"
@@ -76,7 +76,7 @@
 
                 <LinearLayout
                     android:id="@+id/td16sos"
-                    style="@style/linearlayout_view">
+                    style="@style/linearlayout">
 
                     <TextView
                         style="@style/i_textview"
@@ -84,7 +84,7 @@
 
                     <LinearLayout
                         android:id="@+id/td16sosChk"
-                        style="@style/linearlayout_view"
+                        style="@style/linearlayout"
                         android:tag="0">
 
                         <CheckBox
@@ -130,7 +130,7 @@
 
 
             <LinearLayout
-                style="@style/linearlayout_view"
+                style="@style/linearlayout"
                 android:orientation="horizontal">
 
                 <Button
