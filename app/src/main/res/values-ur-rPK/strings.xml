@@ -25,12 +25,13 @@
     <string name="abdomen"> پیٹ </string>
     <string name="groin"> پیٹ کا نچلا حصہ </string>
     <string name="finger"> انگلیاں </string>
-    <string name="thumb"> انگوٹھا/ہاتھ </string>
+    <string name="thumb"> انگوٹھا / ہاتھ </string>
     <string name="lowerarm"> کونی اور کلائی کے درمیان والا بازو کا حصہ </string>
     <string name="upperarm"> اوپر کا بازو </string>
     <string name="foot"> پیر </string>
     <string name="lowerleg"> ٹانگ کا نچلا حصہ </string>
     <string name="upperleg"> جانگھیں </string>
+    <string name="number"> تعداد </string>
 
     <string name="ta01"> Cluster Number </string>
 
@@ -130,11 +131,11 @@
     <string name="teh"> آنکھیں </string>
     <string name="tehh"> EYES Problems </string>
 
-    <string name="te03"> کیا آپ کے (بچے کا نام) کو کبھی آنکھوں میں زخم، جلنے، پھوڑا، نقص، نظرمیں دشواری یا کوئی اورمسئلہ ہوا ؟ </string>
+    <string name="te03"> TE03:\t کیا آپ کے (بچے کا نام) کو کبھی آنکھوں میں زخم، جلنے، پھوڑا، نقص، نظرمیں دشواری یا کوئی اورمسئلہ ہوا ؟ </string>
     <string name="te03a"> ہاں </string>
     <string name="te03b"> نہیں </string>
 
-    <string name="te04"> یہ مسئلہ کتنی بار ہوا ؟ </string>
+    <string name="te04">  TE04:\t  یہ مسئلہ کتنی بار ہوا ؟ </string>
 
     <string name="te05"> مجھے بتائیں کہ اسے کیا مسئلہ ہوا ؟ </string>
     <string name="te05a"> زخم چوٹ کی وجہ سے </string>
