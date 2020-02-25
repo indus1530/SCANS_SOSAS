@@ -114,7 +114,18 @@
     <string name="td14c"> ہسپتال جاتے ہوئے راستے میں </string>
     <string name="td14d"> کہیں اور </string>
 
-    <string name="td15"> کیا آپ کے (بچے کا نام) کو کبھی ہاتھوں، بازو، ٹانگوں یا پیروں زخم، جلنے، پھوڑا، نقص، ہڈی ٹوٹنا کوئی آپریشن، کسی جانور کے کاٹنے، یا کوئی اور مسئلہ ہوا </string>
+    <string name="td15"> J115:\t  کیا آپ کے (بچے کا نام) کو کبھی ہاتھوں، بازو، ٹانگوں یا پیروں زخم، جلنے، پھوڑا، نقص، ہڈی ٹوٹنا کوئی آپریشن، کسی جانور کے کاٹنے، یا کوئی اور مسئلہ ہوا </string>
+    <string name="td15a"> ہاں </string>
+    <string name="td15b"> نہیں </string>
+
+    <string name="td16"> J116:\t آپ کے جسم کے کس حصے پر مسئلہ ہوا ؟ </string>
+    <string name="td16a"> انگلیاں </string>
+    <string name="td16b"> انگوٹھا / ہاتھ </string>
+    <string name="td16c"> کونی اور کلائی کے درمیان والا بازو کا حصہ </string>
+    <string name="td16d"> اوپر کا بازو </string>
+    <string name="td16e"> پیر </string>
+    <string name="td16f"> ٹانگ کا نچلا حصہ </string>
+    <string name="td16g"> جانگھیں </string>
 
     <string name="teh"> آنکھیں </string>
     <string name="tehh"> EYES Problems </string>
@@ -250,17 +261,7 @@
     <string name="countNo"> نہیں </string>
     <string name="ext"> جسم کے نچلے حصے </string>
 
-    <string name="td16">  </string>
-    <string name="td16a"> انگلیاں </string>
-    <string name="td16b"> انگوٹھا / ہاتھ </string>
-    <string name="td16c"> کونی اور کلائی کے درمیان والا بازو کا حصہ </string>
-    <string name="td16d"> اوپر کا بازو </string>
-    <string name="td16e"> پیر </string>
-    <string name="td16f"> ٹانگ کا نچلا حصہ </string>
-    <string name="td16g"> جانگھیں </string>
-
     <string name="dummy_button">Dummy Button</string>
     <string name="ed_letterOnly">QWERTYUIOPASDFGHJKLZXCVBNM qwertyuiopasdfghjklzxcvbnm</string>
-
 
 </resources>
