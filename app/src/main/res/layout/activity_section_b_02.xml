@@ -14,17 +14,13 @@
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sosas_bg"
+        style="@style/i_scrollview"
         android:layoutDirection="rtl"
-        android:padding="16dp">
+        android:textDirection="rtl">
 
         <LinearLayout
             android:id="@+id/ll03"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearlayout_view">
 
             <TextView
                 android:id="@+id/headingTitle"
@@ -33,15 +29,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ext" />
 
-            <!--Radio Button Te03-->
+
+            <!-- J115 - Radio -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/te03cv"
                 style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/linearlayout_view">
 
                     <TextView
                         android:id="@+id/te03a1"
@@ -50,17 +44,21 @@
 
                     <RadioGroup
                         android:id="@+id/td15"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        style="@style/radiogroup"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/td15a"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/td15b"
                             style="@style/radiobutton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:text="@string/no" />
 
                     </RadioGroup>
@@ -69,7 +67,8 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!--Edit Text Te04-->
+
+            <!-- J116 - CheckBox -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/te04cv"
                 style="@style/cardView"
@@ -77,9 +76,7 @@
 
                 <LinearLayout
                     android:id="@+id/td16sos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/linearlayout_view">
 
                     <TextView
                         style="@style/i_textview"
@@ -87,9 +84,7 @@
 
                     <LinearLayout
                         android:id="@+id/td16sosChk"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        style="@style/linearlayout_view"
                         android:tag="0">
 
                         <CheckBox
@@ -133,9 +128,9 @@
 
             </androidx.cardview.widget.CardView>
 
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/linearlayout_view"
                 android:orientation="horizontal">
 
                 <Button
@@ -167,6 +162,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:visibility='visible' />
+
             </LinearLayout>
 
         </LinearLayout>
