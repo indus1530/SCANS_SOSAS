@@ -22,27 +22,28 @@
     <string name="head"> مٿو </string>
     <string name="chest"> ڇاتي </string>
     <string name="back"> پٺي </string>
-    <string name="abdomen">پيٽ  </string>
-    <string name="groin"> پيٽ کان هيٺيون حصو (چڏا)، شرمگاه چتڙ (ٻنڊڻ)  </string>
-    <string name="finger"> آڱريون  </string>
-    <string name="thumb"> اڱوٺو، ٻانهن   </string>
+    <string name="abdomen"> پيٽ </string>
+    <string name="groin"> پيٽ کان هيٺيون حصو (چڏا)، شرمگاه چتڙ (ٻنڊڻ) </string>
+    <string name="finger"> آڱريون </string>
+    <string name="thumb"> اڱوٺو، ٻانهن </string>
     <string name="lowerarm"> ٻانهن جي ڪرائي (ٺونٺ کان هيٺيون حصو) </string>
-    <string name="upperarm">ڏنئورو   </string>
-    <string name="foot">پير    </string>
-    <string name="lowerleg">بڪيون     </string>
-    <string name="upperleg">رانون      </string>
+    <string name="upperarm">ڏنئورو </string>
+    <string name="foot"> پير </string>
+    <string name="lowerleg"> بڪيون </string>
+    <string name="upperleg"> رانون </string>
+    <string name="number"> عدد </string>
 
     <string name="ta01"> Cluster Number </string>
     <string name="ta06"> Village </string>
-    <string name="ta09"> ڇا ھاڻي آءٌ انٽرويو شروع ڪري سگھان ٿي/ٿو؟ </string>
+    <string name="ta09"> ڇا ھاڻي آءٌ انٽرويو شروع ڪري سگھان ٿي / ٿو ؟ </string>
     <string name="ta09c"> گھرو آف / اجازت دستياب ناهي. </string>
 
     <!--Start SOSAS Study Strings-->
     <string name="tdh"> SECTION D: Surgeons Overseas Assessment of Surgical Need (SOSAS) </string>
 
-    <string name="td01"> گذريل پنجن سالن جي دوران توهان جي ڪنهن ٻار جي وفات ٿي؟ </string>
+    <string name="td01"> گذريل پنجن سالن جي دوران توهان جي ڪنهن ٻار جي وفات ٿي ؟ </string>
 
-    <string name="td02"> جيڪڏهن ها ته مون کي اهو ٻڌي تمام گهڻو افسوس ٿيو، گذريل پنجن سالن جي دوران توهان جي گهر ۾ ڪيترن ٻارن جي وفات ٿي؟ </string>
+    <string name="td02"> جيڪڏهن ها ته مون کي اهو ٻڌي تمام گهڻو افسوس ٿيو، گذريل پنجن سالن جي دوران توهان جي گهر ۾ ڪيترن ٻارن جي وفات ٿي ؟ </string>
     <string name="td02a"> ٻارن جو تعداد </string>
     <string name="td02b"> ٻارن جا نالا </string>
 
@@ -61,7 +62,7 @@
 
     <string name="td06"> وفات جي تاريخ </string>
 
-    <string name="td07"> وفات ڪرڻ کان هڪ هفتو پهريان تائين ٻار کي بيان ڪيلن مان ڪو مسئلو هو؟ </string>
+    <string name="td07"> وفات ڪرڻ کان هڪ هفتو پهريان تائين ٻار کي بيان ڪيلن مان ڪو مسئلو هو ؟ </string>
     <string name="td07a"> زخم ڌڪ لڳڻ ڪري </string>
     <string name="td07b"> زخم بغير ڪنهن ڌڪ جي </string>
     <string name="td07c"> پيدا ٿيڻ دوران بيمار يا رت اچڻ </string>
