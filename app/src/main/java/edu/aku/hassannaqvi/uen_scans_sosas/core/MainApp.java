@@ -50,21 +50,13 @@ import edu.aku.hassannaqvi.uen_scans_sosas.ui.other.EndingActivity;
 
 public class MainApp extends Application {
 
-   /* public static final String _IP = "f49461"; // Test PHP server
-    public static final String _IP = "43.245.131.159"; // Test PHP server*/
-
-    /*VCOE1 LIVE SERVER*/
-   /* public static final String _IP = "vcoe1.aku.edu"; // .Net server
-    public static final Integer _PORT = 80; // Port - with colon (:)
-    public static final String _HOST_URL = "https://" + MainApp._IP + "/pulseox/api/";// .VOC server*/
-
     /*F38158 TEST SERVER*/
-    public static final String _IP = "https://vcoe1.aku.edu";// .Net server
+    public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
     //    public static final String _IP = "http://f38158";// .TEST server
-    public static final Integer _PORT = 80; // Port - with colon (:)
-    public static final String _HOST_URL = MainApp._IP + "/scans/api/";
+    public static final String _HOST_URL = MainApp._IP + "/scans/api/";// .TEST server;
     public static final String _SERVER_URL = "sync.php";
     public static final String _UPDATE_URL = MainApp._IP + "/scans/app/";
+
     public static final Integer MONTHS_LIMIT = 11;
     public static final Integer DAYS_LIMIT = 29;
     //public static final long MILLISECONDS_IN_5YEAR = (MILLISECONDS_IN_YEAR + MILLISECONDS_IN_YEAR + MILLISECONDS_IN_YEAR + MILLISECONDS_IN_YEAR + MILLISECONDS_IN_YEAR);

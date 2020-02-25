@@ -18,8 +18,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AreasContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AreasContract.singleAreas;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.ChildContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.ChildContract.singleChild;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.ChildList;
@@ -33,8 +31,6 @@ import edu.aku.hassannaqvi.uen_scans_sosas.contracts.MotherContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.MotherContract.singleMother;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.ProblemContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.ProblemContract.singleProblem;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.TalukasContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UCsContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UsersContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VersionAppContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VillagesContract;
@@ -46,17 +42,48 @@ import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VillagesContract.singleVill
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
-    public static final String SQL_CREATE_USERS = "CREATE TABLE " + UsersContract.singleUser.TABLE_NAME + "("
-            + UsersContract.singleUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + UsersContract.singleUser.ROW_USERNAME + " TEXT,"
-            + UsersContract.singleUser.ROW_PASSWORD + " TEXT,"
-            + UsersContract.singleUser.FULL_NAME + " TEXT"
-            + " );";
-    public static final String DATABASE_NAME = "sosas.db";
-    public static final String DB_NAME = "sosas_copy.db";
-    public static final String PROJECT_NAME = "DMU-SOSASSTUDY";
-    private static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "scans_sosas.db";
+    public static final String DB_NAME = "scans_sosas_copy.db";
+    public static final String PROJECT_NAME = "DMU-SCANSSOSASSTUDY";
+    private static final int DATABASE_VERSION = 1;
+    private static final String SQL_CREATE_USERS = "CREATE TABLE " + UsersContract.SingleUser.TABLE_NAME + "("
+            + UsersContract.SingleUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + UsersContract.SingleUser.ROW_USERNAME + " TEXT,"
+            + UsersContract.SingleUser.ROW_PASSWORD + " TEXT,"
+            + UsersContract.SingleUser.FULL_NAME + " TEXT"
+            + ");";
+    private final String TAG = "DatabaseHelper";
+    private final String SQL_CREATE_CHILD_TABLE = "CREATE TABLE " + singleChild.TABLE_NAME + "("
+            + singleChild._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + singleChild.COLUMN_LUID + " TEXT,"
+            + singleChild.COLUMN_UID + " TEXT,"
+            + singleChild.COLUMN_UUID + " TEXT,"
+            + singleChild.COLUMN_MOTHER_ID + " TEXT,"
+            + singleChild.COLUMN_SERIAL_NO + " TEXT,"
+            + singleChild.COLUMN_MUID + " TEXT,"
+            + singleChild.COLUMN_FMUID + " TEXT,"
+            + singleChild.COLUMN_PTYPE_1 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_2 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_3 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_4 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_5 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_6 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_7 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_8 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_9 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_10 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_11 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_12 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_13 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_14 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_15 + " TEXT,"
+            + singleChild.COLUMN_PTYPE_16 + " TEXT,"
+            + singleChild.COLUMN_FORMDATE + " TEXT,"
+            + singleChild.COLUMN_USER + " TEXT,"
+            + singleChild.COLUMN_DEVICEID + " TEXT,"
+            + singleChild.COLUMN_DEVICETAGID + " TEXT,"
+            + singleChild.COLUMN_SYNCED + " TEXT,"
+            + singleChild.COLUMN_SYNCED_DATE + " TEXT );";
     private static final String SQL_CREATE_FORMS = "CREATE TABLE "
             + FormsTable.TABLE_NAME + "("
             + FormsTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -85,21 +112,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             FormsTable.COLUMN_SYNCED + " TEXT," +
             FormsTable.COLUMN_SYNCED_DATE + " TEXT"
             + " );";
-    private static final String SQL_SELECT_MOTHER_BY_CHILD =
-            "SELECT c.agem cm, c.agey cy, c.aged cd, c.gender, c.serial serial, m.serial serialm, c.name child_name, c.dss_id_member child_id, m.name mother_name, c.dss_id_member mother_id, c.dob date_of_birth FROM census C join census m on c.dss_id_m = m.dss_id_member where c.member_type =? and c.uuid = m.uuid and c.current_status IN ('1', '2') and c.uuid = ? group by mother_id order by substr(c.dob, 7) desc, substr(c.dob, 4,2) desc, substr(c.dob, 1,2) desc;";
-    private static final String SQL_DELETE_USERS =
-            "DROP TABLE IF EXISTS " + UsersContract.singleUser.TABLE_NAME;
-    private static final String SQL_DELETE_FORMS =
-            "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
-    private static final String SQL_SELECT_CHILD =
-            "SELECT * from census where member_type =? and dss_id_hh =? and uuid =? and current_status IN ('1', '2')";
-    private static final String SQL_SELECT_MWRA =
-            "SELECT * from census where member_type =? and dss_id_hh =? and uuid =? and current_status IN ('1', '2')";
-    private static final String SQL_DELETE_CHILDLIST = "DROP TABLE IF EXISTS " + ChildList.singleChildList.TABLE_NAME;
-    private static final String SQL_DELETE_VILLAGES = "DROP TABLE IF EXISTS " + singleVillage.TABLE_NAME;
-    private static final String SQL_DELETE_TALUKAS = "DROP TABLE IF EXISTS " + TalukasContract.singleTalukas.TABLE_NAME;
-    private static final String SQL_DELETE_UCS = "DROP TABLE IF EXISTS " + UCsContract.singleUCs.TABLE_NAME;
-    private static final String SQL_DELETE_AREAS = "DROP TABLE IF EXISTS " + singleAreas.TABLE_NAME;
 
     private final String SQL_CREATE_VERSIONAPP = "CREATE TABLE " + VersionAppContract.VersionAppTable.TABLE_NAME + " (" +
             VersionAppContract.VersionAppTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -107,22 +119,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             VersionAppContract.VersionAppTable.COLUMN_VERSION_NAME + " TEXT, " +
             VersionAppContract.VersionAppTable.COLUMN_PATH_NAME + " TEXT " +
             ");";
-
-    private final String SQL_CREATE_TALUKAS = "CREATE TABLE " + TalukasContract.singleTalukas.TABLE_NAME + "("
-            + TalukasContract.singleTalukas._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + TalukasContract.singleTalukas.COLUMN_TALUKA_CODE + " TEXT,"
-            + TalukasContract.singleTalukas.COLUMN_TALUKA + " TEXT );";
-    private final String SQL_CREATE_UCS = "CREATE TABLE " + UCsContract.singleUCs.TABLE_NAME + "("
-            + UCsContract.singleUCs._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + UCsContract.singleUCs.COLUMN_UCCODE + " TEXT,"
-            + UCsContract.singleUCs.COLUMN_TALUKA_CODE + " TEXT,"
-            + UCsContract.singleUCs.COLUMN_UCS + " TEXT );";
-    private final String SQL_CREATE_AREAS = "CREATE TABLE " + singleAreas.TABLE_NAME + "("
-            + singleAreas._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + singleAreas.COLUMN_AREACODE + " TEXT,"
-            + singleAreas.COLUMN_UC_CODE + " TEXT,"
-            + singleAreas.COLUMN_AREA + " TEXT );";
-
 
     private final String SQL_CREATE_PSU_TABLE = "CREATE TABLE " + singleVillage.TABLE_NAME + " (" +
             singleVillage._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -146,43 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleDeceasedChild.COLUMN_DEVICETAGID + " TEXT,"
             + singleDeceasedChild.COLUMN_SYNCED + " TEXT,"
             + singleDeceasedChild.COLUMN_SYNCED_DATE + " TEXT );";
-
-
-    private final String SQL_CREATE__CHILD_TABLE = "CREATE TABLE " + singleChild.TABLE_NAME + "("
-            + singleChild._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + singleChild.COLUMN_LUID + " TEXT,"
-            + singleChild.COLUMN_UID + " TEXT,"
-            + singleChild.COLUMN_UUID + " TEXT,"
-            + singleChild.COLUMN_MOTHER_ID + " TEXT,"
-            + singleChild.COLUMN_SERIAL_NO + " TEXT,"
-            + singleChild.COLUMN_MUID + " TEXT,"
-            + singleChild.COLUMN_FMUID + " TEXT,"
-//            + singleChild.COLUMN_DA + " TEXT,"
-            + singleChild.COLUMN_PTYPE_1 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_2 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_3 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_4 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_5 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_6 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_7 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_8 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_9 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_10 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_11 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_12 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_13 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_14 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_15 + " TEXT,"
-            + singleChild.COLUMN_PTYPE_16 + " TEXT,"
-            + singleChild.COLUMN_FORMDATE + " TEXT,"
-            + singleChild.COLUMN_USER + " TEXT,"
-            + singleChild.COLUMN_DEVICEID + " TEXT,"
-            + singleChild.COLUMN_DEVICETAGID + " TEXT,"
-            + singleChild.COLUMN_SYNCED + " TEXT,"
-            + singleChild.COLUMN_SYNCED_DATE + " TEXT );";
-
-
-    private final String SQL_CREATE__MOTHER_TABLE = "CREATE TABLE " + singleMother.TABLE_NAME + "("
+    private final String SQL_CREATE_MOTHER_TABLE = "CREATE TABLE " + singleMother.TABLE_NAME + "("
             + singleMother._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + singleMother.COLUMN_LUID + " TEXT,"
             + singleMother.COLUMN_UID + " TEXT,"
@@ -197,8 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleMother.COLUMN_DEVICETAGID + " TEXT,"
             + singleMother.COLUMN_SYNCED + " TEXT,"
             + singleMother.COLUMN_SYNCED_DATE + " TEXT );";
-
-    private final String SQL_CREATE__PROBLEM_TABLE = "CREATE TABLE " + singleProblem.TABLE_NAME + "("
+    private final String SQL_CREATE_PROBLEM_TABLE = "CREATE TABLE " + singleProblem.TABLE_NAME + "("
             + singleProblem._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + singleProblem.COLUMN_UID + " TEXT,"
             + singleProblem.COLUMN_UUID + " TEXT,"
@@ -212,10 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleProblem.COLUMN_DEVICETAGID + " TEXT,"
             + singleProblem.COLUMN_SYNCED + " TEXT,"
             + singleProblem.COLUMN_SYNCED_DATE + " TEXT );";
-
-    private final String SQL_ALTER_MOTHER = " ALTER TABLE " + singleMother.TABLE_NAME + " ADD COLUMN " +
-            singleMother.COLUMN_UUID + " TEXT;";
-
+    private String spDateT = new SimpleDateFormat("dd-MM-yy").format(new Date().getTime());
 
     private final String SQL_CREATE_CHILDLIST = "CREATE TABLE " + ChildList.singleChildList.TABLE_NAME + "("
             + ChildList.singleChildList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -242,13 +198,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleMember.COLUMN_MOMTHER_NAME + " TEXT,"
             + singleMember.COLUMN_TYPE + " TEXT );";
 
-
-    private final String TAG = "DatabaseHelper";
-
-
-    public String spDateT = new SimpleDateFormat("dd-MM-yy").format(new Date().getTime());
-
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -258,28 +207,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_FORMS);
-        db.execSQL(SQL_CREATE_TALUKAS);
-        db.execSQL(SQL_CREATE_UCS);
         db.execSQL(SQL_CREATE_CHILDLIST);
         db.execSQL(SQL_CREATE_DECEASED_CHILD);
         db.execSQL(SQL_CREATE_PSU_TABLE);
-        db.execSQL(SQL_CREATE_AREAS);
         db.execSQL(SQL_CREATE_VERSIONAPP);
         db.execSQL(SQL_CREATE_FAMILY_MEMBERS);
-        db.execSQL(SQL_CREATE__CHILD_TABLE);
-        db.execSQL(SQL_CREATE__PROBLEM_TABLE);
-        db.execSQL(SQL_CREATE__MOTHER_TABLE);
+        db.execSQL(SQL_CREATE_CHILD_TABLE);
+        db.execSQL(SQL_CREATE_PROBLEM_TABLE);
+        db.execSQL(SQL_CREATE_MOTHER_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-
-        switch (i) {
-            case 1:
-                db.execSQL(SQL_ALTER_MOTHER);
-        }
-
 
     }
 
@@ -379,167 +318,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
-    public void syncTalukas(JSONArray Talukaslist) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TalukasContract.singleTalukas.TABLE_NAME, null, null);
-        try {
-            JSONArray jsonArray = Talukaslist;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
-
-                TalukasContract Vc = new TalukasContract();
-                Vc.Sync(jsonObjectCC);
-
-                ContentValues values = new ContentValues();
-
-                values.put(TalukasContract.singleTalukas.COLUMN_TALUKA_CODE, Vc.getTalukacode());
-                values.put(TalukasContract.singleTalukas.COLUMN_TALUKA, Vc.getTaluka());
-
-                db.insert(TalukasContract.singleTalukas.TABLE_NAME, null, values);
-            }
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
-    }
-
-    public void syncUCs(JSONArray UCslist) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(UCsContract.singleUCs.TABLE_NAME, null, null);
-        try {
-            JSONArray jsonArray = UCslist;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
-
-                UCsContract Vc = new UCsContract();
-                Vc.Sync(jsonObjectCC);
-
-                ContentValues values = new ContentValues();
-
-                values.put(UCsContract.singleUCs.COLUMN_UCCODE, Vc.getUccode());
-                values.put(UCsContract.singleUCs.COLUMN_UCS, Vc.getUcs());
-                values.put(UCsContract.singleUCs.COLUMN_TALUKA_CODE, Vc.getTaluka_code());
-
-                db.insert(UCsContract.singleUCs.TABLE_NAME, null, values);
-            }
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
-    }
-
-    public void syncAreas(JSONArray Areaslist) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(singleAreas.TABLE_NAME, null, null);
-        try {
-            JSONArray jsonArray = Areaslist;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
-
-                AreasContract Vc = new AreasContract();
-                Vc.Sync(jsonObjectCC);
-
-                ContentValues values = new ContentValues();
-
-                values.put(singleAreas.COLUMN_AREACODE, Vc.getAreacode());
-                values.put(singleAreas.COLUMN_AREA, Vc.getArea());
-                values.put(singleAreas.COLUMN_UC_CODE, Vc.getUc_code());
-
-                db.insert(singleAreas.TABLE_NAME, null, values);
-            }
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
-    }
-
-    public Collection<TalukasContract> getAllTalukas() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = null;
-        String[] columns = {
-                TalukasContract.singleTalukas.COLUMN_TALUKA_CODE,
-                TalukasContract.singleTalukas.COLUMN_TALUKA
-        };
-
-        String whereClause = null;
-        String[] whereArgs = null;
-        String groupBy = null;
-        String having = null;
-
-        String orderBy =
-                TalukasContract.singleTalukas.COLUMN_TALUKA + " ASC";
-
-        Collection<TalukasContract> allDC = new ArrayList<>();
-        try {
-            c = db.query(
-                    TalukasContract.singleTalukas.TABLE_NAME,  // The table to query
-                    columns,                   // The columns to return
-                    whereClause,               // The columns for the WHERE clause
-                    whereArgs,                 // The values for the WHERE clause
-                    groupBy,                   // don't group the rows
-                    having,                    // don't filter by row groups
-                    orderBy                    // The sort order
-            );
-            while (c.moveToNext()) {
-                TalukasContract dc = new TalukasContract();
-                allDC.add(dc.HydrateTalukas(c));
-            }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
-        return allDC;
-    }
-
-
-    public Collection<UCsContract> getAllUCs(String talukaCode) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = null;
-        String[] columns = {
-                UCsContract.singleUCs.COLUMN_UCCODE,
-                UCsContract.singleUCs.COLUMN_UCS,
-                UCsContract.singleUCs.COLUMN_TALUKA_CODE
-        };
-
-        String whereClause = UCsContract.singleUCs.COLUMN_TALUKA_CODE + "=?";
-        String[] whereArgs = new String[]{talukaCode};
-        String groupBy = null;
-        String having = null;
-
-        String orderBy =
-                UCsContract.singleUCs.COLUMN_UCS + " ASC";
-
-        Collection<UCsContract> allDC = new ArrayList<>();
-        try {
-            c = db.query(
-                    UCsContract.singleUCs.TABLE_NAME,  // The table to query
-                    columns,                   // The columns to return
-                    whereClause,               // The columns for the WHERE clause
-                    whereArgs,                 // The values for the WHERE clause
-                    groupBy,                   // don't group the rows
-                    having,                    // don't filter by row groups
-                    orderBy                    // The sort order
-            );
-            while (c.moveToNext()) {
-                UCsContract dc = new UCsContract();
-                allDC.add(dc.HydrateUCs(c));
-            }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
-        return allDC;
-    }
-
     public List<ChildList> getChildList(String areaCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
@@ -634,49 +412,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return allDC;
-    }
-
-    public Collection<AreasContract> getAllAreas(int UCCode) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = null;
-        String[] columns = {
-                singleAreas.COLUMN_AREACODE,
-                singleAreas.COLUMN_AREA,
-                singleAreas.COLUMN_UC_CODE
-        };
-
-        String whereClause = singleAreas.COLUMN_UC_CODE + "=?";
-        String[] whereArgs = new String[]{String.valueOf(UCCode)};
-        String groupBy = null;
-        String having = null;
-
-        String orderBy =
-                singleAreas.COLUMN_AREA + " ASC";
-
-        Collection<AreasContract> allAC = new ArrayList<>();
-        try {
-            c = db.query(
-                    singleAreas.TABLE_NAME,  // The table to query
-                    columns,                   // The columns to return
-                    whereClause,               // The columns for the WHERE clause
-                    whereArgs,                 // The values for the WHERE clause
-                    groupBy,                   // don't group the rows
-                    having,                    // don't filter by row groups
-                    orderBy                    // The sort order
-            );
-            while (c.moveToNext()) {
-                AreasContract dc = new AreasContract();
-                allAC.add(dc.HydrateUCs(c));
-            }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
-        return allAC;
     }
 
     public Collection<VillagesContract> getVillages(String areaCode) {
@@ -791,7 +526,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void syncUser(JSONArray userlist) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(UsersContract.singleUser.TABLE_NAME, null, null);
+        db.delete(UsersContract.SingleUser.TABLE_NAME, null, null);
         try {
             JSONArray jsonArray = userlist;
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -802,11 +537,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 user.Sync(jsonObjectUser);
                 ContentValues values = new ContentValues();
 
-                values.put(UsersContract.singleUser.ROW_USERNAME, user.getUserName());
-                values.put(UsersContract.singleUser.ROW_PASSWORD, user.getPassword());
-                values.put(UsersContract.singleUser.FULL_NAME, user.getFULL_NAME());
-//                values.put(singleUser.REGION_DSS, user.getREGION_DSS());
-                db.insert(UsersContract.singleUser.TABLE_NAME, null, values);
+                values.put(UsersContract.SingleUser.ROW_USERNAME, user.getUserName());
+                values.put(UsersContract.SingleUser.ROW_PASSWORD, user.getPassword());
+                values.put(UsersContract.SingleUser.FULL_NAME, user.getFULL_NAME());
+//                values.put(SingleUser.REGION_DSS, user.getREGION_DSS());
+                db.insert(UsersContract.SingleUser.TABLE_NAME, null, values);
             }
 
 
@@ -817,11 +552,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
     public boolean Login(String username, String password) throws SQLException {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor mCursor = db.rawQuery("SELECT * FROM " + UsersContract.singleUser.TABLE_NAME + " WHERE " + UsersContract.singleUser.ROW_USERNAME + "=? AND " + UsersContract.singleUser.ROW_PASSWORD + "=?", new String[]{username, password});
+        Cursor mCursor = db.rawQuery("SELECT * FROM " + UsersContract.SingleUser.TABLE_NAME + " WHERE " + UsersContract.SingleUser.ROW_USERNAME + "=? AND " + UsersContract.SingleUser.ROW_PASSWORD + "=?", new String[]{username, password});
         if (mCursor != null) {
             return mCursor.getCount() > 0;
         }
@@ -866,7 +600,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values);
         return newRowId;
     }
-
 
     public Long addChildDeceaseForm(DeceasedChildContract fc) {
 
@@ -973,7 +706,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-
     public void updateSyncedForms(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -1011,7 +743,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 where,
                 whereArgs);
     }
-
 
     public void updateSyncedProblemsForm(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1069,7 +800,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 where,
                 whereArgs);
     }
-
 
     public int updateFormID() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1272,7 +1002,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return allFC;
     }
-
 
     public Collection<FormsContract> getUnsyncedForms() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1685,7 +1414,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return alc;
         }
     }
-
 
     public int updateEnding() {
         SQLiteDatabase db = this.getReadableDatabase();

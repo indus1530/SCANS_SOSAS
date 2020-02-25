@@ -67,8 +67,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AppInfo;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.TalukasContract;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.UCsContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.sync.SyncActivity;
