@@ -35,11 +35,9 @@ import androidx.databinding.DataBindingUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.FormsContract;
@@ -67,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
     String m_Text = "";
     ProgressDialog mProgressDialog;
-    ArrayList<String> lablesAreas;
-    Collection<AreasContract> AreasList;
-    Map<String, String> AreasMap;
     SharedPreferences sharedPrefDownload;
     SharedPreferences.Editor editorDownload;
     DownloadManager downloadManager;

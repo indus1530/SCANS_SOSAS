@@ -35,7 +35,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -57,10 +56,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,17 +83,7 @@ import static java.lang.Thread.sleep;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
-    ArrayAdapter<String> dataAdapter;
-
-    ArrayList<String> lablesTalukas;
-    Collection<TalukasContract> TalukasList;
-    Map<String, String> talukasMap;
-
-    ArrayList<String> lablesUCs;
-    Collection<UCsContract> UcsList;
-    Map<String, String> ucsMap;
     protected static LocationManager locationManager;
-
 
     // UI references.
     @BindView(R.id.login_progress)
@@ -111,13 +98,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     TextView txtinstalldate;
     @BindView(R.id.email_sign_in_button)
     Button mEmailSignInButton;
-
-    /*@BindView(R.id.spTaluka)
-    NiceSpinner spTaluka;
-
-    @BindView(R.id.spUCs)
-    NiceSpinner spUCs;*/
-
 
     @BindView(R.id.syncData)
     TextView syncData;
