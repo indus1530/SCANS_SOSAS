@@ -173,7 +173,7 @@ public class MotherContract {
 
     public static abstract class singleMother implements BaseColumns {
 
-        public static final String TABLE_NAME = "mother";
+        public static final String TABLE_NAME = "sMother";
         public static final String _ID = "_id";
         public static final String COLUMN_UID = "_uid";
         public static final String COLUMN_UUID = "_uuid";
