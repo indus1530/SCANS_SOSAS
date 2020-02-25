@@ -96,6 +96,7 @@
                         android:padding="24dp"
                         android:text="Check HouseHold"
                         android:textColor="@color/white" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
