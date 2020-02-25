@@ -61,6 +61,21 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin">
 
+                <TextView
+                    android:id="@+id/appName"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/mainmenu"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/lblMainMenu"
@@ -178,7 +193,8 @@
                             android:layout_weight="1"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:onClick="@{() -> callback.syncServer()}">
+                            android:onClick="@{() -> callback.syncServer()}"
+                            app:cardCornerRadius="20dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -216,7 +232,8 @@
                             android:layout_weight="1"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:onClick="@{() -> callback.openDB()}">
+                            android:onClick="@{() -> callback.openDB()}"
+                            app:cardCornerRadius="20dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -265,7 +282,8 @@
                             android:layout_weight="1"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:onClick="@{() -> callback.syncFamilyMembers()}">
+                            android:onClick="@{() -> callback.syncFamilyMembers()}"
+                            app:cardCornerRadius="20dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -295,6 +313,7 @@
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
