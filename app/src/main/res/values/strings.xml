@@ -15,6 +15,7 @@
     <string name="error_field_required">This field is required</string>
 
     <string name="eye"> آنکھیں </string>
+    <string name="name"> نام </string>
     <string name="ear"> کان </string>
     <string name="face"> چہرہ </string>
     <string name="neck"> گردن </string>
@@ -218,7 +219,8 @@
 
     <string name="no"> نہیں </string>
 
-    <string name="other"> دیگر وضاحت کریں </string>
+    <string name="other"> دیگر </string>
+    <string name="specify"> وضاحت کریں </string>
 
     <string name="istatus1"> مکمل </string>
     <string name="istatus2"> انکار کرنا </string>
@@ -250,7 +252,7 @@
 
     <string name="td16">  </string>
     <string name="td16a"> انگلیاں </string>
-    <string name="td16b"> انگوٹھا/ہاتھ </string>
+    <string name="td16b"> انگوٹھا / ہاتھ </string>
     <string name="td16c"> کونی اور کلائی کے درمیان والا بازو کا حصہ </string>
     <string name="td16d"> اوپر کا بازو </string>
     <string name="td16e"> پیر </string>

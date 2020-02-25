@@ -61,7 +61,7 @@
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     </style>
 
-    <style name="textInput" parent="Widget.AppCompat.EditText">
+    <!--<style name="textInput" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">12dp</item>
@@ -79,11 +79,58 @@
         <item name="android:typeface">sans</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:focusableInTouchMode">true</item>
+    </style>-->
+
+
+    <style name="linearlayout_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">1dp</item>
     </style>
-    ​
+
+    <style name="textInput" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/et_style</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:inputType">textPostalAddress</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="i_scrollview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">5sp</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:paddingBottom">5sp</item>
+    </style>
+
+    <style name="EditTextComa" parent="@style/textInput">
+        <item name="android:digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ , .</item>
+    </style>
+
+    <style name="EditTextAlpha" parent="@style/textInput">
+        <item name="android:digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</item>
+    </style>
+
+    <style name="EditTextAlphaNumeric" parent="@style/textInput">
+        <item name="android:digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            0123456789
+        </item>
+    </style>
 
     <style name="EditTextNum" parent="@style/textInput">
         <item name="android:inputType">number</item>
+    </style>
+
+    <style name="EditTextdeci" parent="@style/textInput">
+        <item name="android:inputType">numberDecimal</item>
     </style>
 
 
