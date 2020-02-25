@@ -18,7 +18,6 @@ import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.databinding.ActivityChildListBinding;
 
-import static edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp.motherData;
 import static edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp.problemType;
 
 public class ChildListActivity extends AppCompatActivity {
@@ -26,7 +25,7 @@ public class ChildListActivity extends AppCompatActivity {
     ActivityChildListBinding bi;
     DatabaseHelper db;
     ChildListAdapter adapter;
-    List<FamilyMembersContract> list;
+    //    List<FamilyMembersContract> list;
     public static final int CHILD_MAIN = 1;
     public static final int CHILD_MAIN_END = 101;
     int childCount = 0;
@@ -46,8 +45,8 @@ public class ChildListActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         bi.childlist.setLayoutManager(manager);
         bi.childlist.setHasFixedSize(true);
-        list = db.getChildrenList(motherData.getHhno(), motherData.getClusterno(), motherData.getSerialno());
-        setupRecyclerView(list);
+//        list = db.getChildrenList(motherData.getHhno(), motherData.getClusterno(), motherData.getSerialno());
+        setupRecyclerView(InfoActivity.childList);
     }
 
     private void setupRecyclerView(List<FamilyMembersContract> list) {
@@ -78,7 +77,7 @@ public class ChildListActivity extends AppCompatActivity {
 
         if (requestCode == CHILD_MAIN) {
             if (resultCode == RESULT_OK) {
-                if (childCount == list.size()) {
+                if (childCount == InfoActivity.childList.size()) {
                     problemType = 0;
                     finish();
                 } else

@@ -35,10 +35,9 @@ class InfoActivity : AppCompatActivity() {
     var flag = false
 
     companion object {
-        //        lateinit var motherList: List<FamilyMembersContract>
         var motherList = MutableLiveData<MutableList<FamilyMembersContract>>()
-
         lateinit var womenList: MutableList<Pair<Int, Boolean>>
+        lateinit var childList: MutableList<FamilyMembersContract>
 
         fun checkingWomenExist(serial: Int): Boolean {
             val item = womenList.find { it.first == serial }

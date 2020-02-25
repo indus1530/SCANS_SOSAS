@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.uen_scans_sosas.content_provider
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.widget.Toast
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.FamilyMembersContract
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.InfoActivity
 import kotlinx.coroutines.*
@@ -28,12 +29,32 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
                             InfoActivity.motherList.value = lst
                         }
                     }
+
+                    var indexCursorChild: Cursor? = null
+                    val childIndex = async { indexCursorChild = setContent(InfoActivity.motherList.value?.get(0), 2) }
+                    if (childIndex.await().let { true }) {
+                        if (indexCursorChild != null) {
+                            if (indexCursorChild!!.count > 0) {
+                                InfoActivity.childList = mutableListOf()
+                                while (indexCursorChild!!.moveToNext()) {
+                                    withContext(Dispatchers.Main) {
+                                        InfoActivity.childList.add(FamilyMembersContract().hydrateContentData(indexCursorChild))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                InfoActivity.motherList.value = mutableListOf()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "No Mother Found!!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-    private fun setContent(fmc: FamilyMemberContent? = null, kishType: Int): Cursor? {
+    private fun setContent(fmc: FamilyMembersContract? = null, kishType: Int): Cursor? {
         val uri = Uri.parse("content://com.scans.familymember")
         val columns = arrayOf(
                 FamilyMemberInterface.COLUMN_ID,
