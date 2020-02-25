@@ -14,12 +14,9 @@
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sosas_bg"
+        style="@style/i_scrollview"
         android:layoutDirection="rtl"
-        android:textDirection="rtl"
-        android:padding="16dp">
+        android:textDirection="rtl">
 
         <LinearLayout
             android:id="@+id/ll03"
