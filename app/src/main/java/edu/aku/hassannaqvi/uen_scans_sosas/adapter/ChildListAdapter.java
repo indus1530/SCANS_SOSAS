@@ -78,6 +78,11 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.View
         return viewHolder;
     }
 
+    public void setMList(List<FamilyMembersContract> members) {
+        mList = members;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mList.size();
