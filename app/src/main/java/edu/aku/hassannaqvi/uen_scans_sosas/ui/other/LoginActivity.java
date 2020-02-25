@@ -31,9 +31,7 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +65,7 @@ import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AppInfo;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.sync.SyncActivity;
+import edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants;
 import edu.aku.hassannaqvi.uen_scans_sosas.utils.Util;
 
 import static edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants.DUMMY_CREDENTIALS;
@@ -151,30 +150,24 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 .build();
 
 //        mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
+        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+            if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                attemptLogin();
+                return true;
             }
+            return false;
         });
 
 
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mEmailSignInButton.setOnClickListener(view -> {
+            attemptLogin();
+            /*if (spTaluka.getSelectedIndex() != 0 && spUCs.getSelectedIndex() != 0) {
                 attemptLogin();
-                /*if (spTaluka.getSelectedIndex() != 0 && spUCs.getSelectedIndex() != 0) {
-                    attemptLogin();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Please Sync Data Or Select UCs and Taluka before login", Toast.LENGTH_SHORT).show();
-                }*/
+            } else {
+                Toast.makeText(LoginActivity.this, "Please Sync Data Or Select UCs and Taluka before login", Toast.LENGTH_SHORT).show();
+            }*/
 
 
-            }
         });
 
         db = new DatabaseHelper(this);
@@ -265,11 +258,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         if (sharedPref.getBoolean("flag", false)) {
 
             String dt = sharedPref.getString("dt", new SimpleDateFormat("dd-MM-yy").format(new Date()));
-
-            if (dt != new SimpleDateFormat("dd-MM-yy").format(new Date())) {
+            if (!dt.equals(new SimpleDateFormat("dd-MM-yy").format(new Date()))) {
                 editor.putString("dt", new SimpleDateFormat("dd-MM-yy").format(new Date()));
 
-                editor.commit();
+                editor.apply();
             }
 
             File folder = new File(Environment.getExternalStorageDirectory() + File.separator + DatabaseHelper.PROJECT_NAME);
@@ -328,7 +320,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            startActivity(new Intent(this, SyncActivity.class));
+            startActivity(new Intent(this, SyncActivity.class).putExtra(Constants.SYNC_LOGIN, true));
         } else {
             Toast.makeText(this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }

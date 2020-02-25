@@ -55,7 +55,7 @@ public class MainApp extends Application {
     //    public static final String _IP = "http://f38158";// .TEST server
     public static final String _HOST_URL = MainApp._IP + "/scans/api/";// .TEST server;
     public static final String _SERVER_URL = "sync.php";
-    public static final String _UPDATE_URL = MainApp._IP + "/scans/app/";
+    public static final String _UPDATE_URL = MainApp._IP + "/scans/sosas/app/";
 
     public static final Integer MONTHS_LIMIT = 11;
     public static final Integer DAYS_LIMIT = 29;
@@ -90,6 +90,7 @@ public class MainApp extends Application {
     public static MotherContract mc;
     public static ChildContract cc;
     public static String userName = "0000";
+    public static String DIST_ID;
 
     public static void setItemClick(OnItemClick itemClick) {
         MainApp.itemClick = itemClick;

@@ -15,6 +15,7 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
     }
 
     private suspend fun populateList() = withContext(Dispatchers.IO) {
+        //        InfoActivity.motherList.value = mutableListOf()
         var indexCursor: Cursor? = null
         val index = async {
             indexCursor = setContent(kishType = 1)
@@ -44,11 +45,11 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
                             }
                         }
                     }
-                }
-            } else {
-                InfoActivity.motherList.value = mutableListOf()
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "No Mother Found!!", Toast.LENGTH_SHORT).show()
+                } else {
+                    withContext(Dispatchers.Main) {
+                        InfoActivity.motherList.value = mutableListOf()
+                        Toast.makeText(context, "No Mother Found!!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

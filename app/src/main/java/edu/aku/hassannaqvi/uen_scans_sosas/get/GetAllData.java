@@ -158,10 +158,10 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     result.append(line);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             return null;
         } finally {
-            urlConnection.disconnect();
+            if (urlConnection != null) urlConnection.disconnect();
         }
 
 
