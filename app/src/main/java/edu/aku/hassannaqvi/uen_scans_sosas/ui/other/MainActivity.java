@@ -42,14 +42,12 @@ import java.util.List;
 import java.util.Map;
 
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
-import edu.aku.hassannaqvi.uen_scans_sosas.contracts.AreasContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.FormsContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.VersionAppContract;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.databinding.ActivityMainBinding;
-import edu.aku.hassannaqvi.uen_scans_sosas.get.GetFamilyMembersData;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.InfoActivity;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.SectionBActivity;
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.SectionCActivity;
@@ -341,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
         if (networkInfo != null && networkInfo.isConnected()) {
 
             // Sync Random
-            new GetFamilyMembersData(this).execute();
+//            new GetFamilyMembersData(this).execute();
             SharedPreferences syncPref = getSharedPreferences("SyncInfo", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = syncPref.edit();
             editor.putString("LastDownSyncServer", dtToday);

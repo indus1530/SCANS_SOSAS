@@ -32,10 +32,10 @@ import edu.aku.hassannaqvi.uen_scans_sosas.otherClasses.SyncModel;
 
 public class GetAllData extends AsyncTask<String, String, String> {
 
-    HttpURLConnection urlConnection;
-    SyncListAdapter adapter;
-    List<SyncModel> list;
-    int position;
+    private HttpURLConnection urlConnection;
+    private SyncListAdapter adapter;
+    private List<SyncModel> list;
+    private int position;
     private String TAG = "";
     private Context mContext;
     private ProgressDialog pd;
@@ -55,7 +55,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
         this.list = list;
         TAG = "Get" + syncClass;
         switch (syncClass) {
-            case "Users":
+            case "User":
                 position = 0;
                 break;
             case "VersionApp":
@@ -83,7 +83,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
         switch (values[0]) {
-            case "Users":
+            case "User":
                 position = 0;
                 break;
             case "VersionApp":
@@ -104,15 +104,14 @@ public class GetAllData extends AsyncTask<String, String, String> {
         URL url = null;
         try {
             switch (syncClass) {
-                case "Users":
-                    url = new URL(MainApp._HOST_URL + UsersContract.singleUser._URI);
+                case "User":
+                    url = new URL(MainApp._HOST_URL + UsersContract.SingleUser._URI);
                     position = 0;
                     break;
                 case "VersionApp":
                     url = new URL(MainApp._UPDATE_URL + VersionAppContract.VersionAppTable._URI);
                     position = 1;
                     break;
-
             }
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -120,7 +119,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
             urlConnection.setConnectTimeout(150000 /* milliseconds */);
 
             switch (syncClass) {
-                case "Users":
+                case "User":
                     urlConnection.setRequestMethod("POST");
                     urlConnection.setDoOutput(true);
                     urlConnection.setDoInput(true);
@@ -142,7 +141,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     wr.flush();
                     wr.close();
                     break;
-
             }
 
 
@@ -175,15 +173,13 @@ public class GetAllData extends AsyncTask<String, String, String> {
 
         //Do something with the JSON string
         if (result != null) {
-            String json = result;
-            if (json.length() > 0) {
+            if (result.length() > 0) {
                 DatabaseHelper db = new DatabaseHelper(mContext);
-                String message;
                 try {
-                    JSONArray jsonArray = new JSONArray(json);
+                    JSONArray jsonArray = new JSONArray(result);
 
                     switch (syncClass) {
-                        case "Users":
+                        case "User":
                             db.syncUser(jsonArray);
                             position = 0;
                             break;
@@ -191,6 +187,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                             db.syncVersionApp(jsonArray);
                             position = 1;
                             break;
+
                     }
 
                     pd.setMessage("Received: " + jsonArray.length());
@@ -203,8 +200,8 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     e.printStackTrace();
                 }
             } else {
-                pd.setMessage("Received: " + json.length() + "");
-                list.get(position).setmessage("Received: " + json.length() + "");
+                pd.setMessage("Received: " + result.length() + "");
+                list.get(position).setmessage("Received: " + result.length() + "");
                 list.get(position).setstatus("Successfull");
                 list.get(position).setstatusID(3);
                 adapter.updatesyncList(list);
