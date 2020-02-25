@@ -14,13 +14,14 @@
     <string name="error_field_required">This field is required</string>
 
 
-    <string name="eye">اکيون </string>
-    <string name="ear">ڪن </string>
-    <string name="face">منهن </string>
-    <string name="neck">ڳچي </string>
-    <string name="head">مٿو </string>
-    <string name="chest">ڇاتي </string>
-    <string name="back">پٺي </string>
+    <string name="eye"> اکيون </string>
+    <string name="name"> اکيون </string>
+    <string name="ear"> ڪن </string>
+    <string name="face"> منهن </string>
+    <string name="neck"> ڳچي </string>
+    <string name="head"> مٿو </string>
+    <string name="chest"> ڇاتي </string>
+    <string name="back"> پٺي </string>
     <string name="abdomen">پيٽ  </string>
     <string name="groin"> پيٽ کان هيٺيون حصو (چڏا)، شرمگاه چتڙ (ٻنڊڻ)  </string>
     <string name="finger"> آڱريون  </string>
@@ -222,6 +223,7 @@
     <string name="yes"> ھا </string>
     <string name="no"> نه </string>
     <string name="other"> ٻيو ڪجهه </string>
+    <string name="specify"> وضاحت ڪريو </string>
 
     <!-- Strings related to Sections Below -->
     <string name="istatus1"> مکمل </string>
