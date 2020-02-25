@@ -72,24 +72,22 @@
 
                         <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/hh_name"
-                            style="@style/textInput"
+                            style="@style/EditTextNum"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:hint="####-###"
-                            android:inputType="number"
-                            android:padding="10dp"
                             app:mask="####-###"
                             app:pattern="^(\\d{4,4}\\-\\d{3,3})$" />
 
                         <Button
                             android:id="@+id/checkHH"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimaryBeta"
-                            android:padding="24dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_bg"
                             android:text="Check HouseHold"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/colorPrimaryDark" />
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
