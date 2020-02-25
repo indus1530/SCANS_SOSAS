@@ -5,15 +5,12 @@ import android.database.Cursor
 import android.net.Uri
 import edu.aku.hassannaqvi.uen_scans_sosas.contracts.FamilyMembersContract
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.InfoActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class DataFactory(private val context: Context, private val cluster_no: String, private val hhno: String) {
 
     init {
-        GlobalScope.async { populateList() }
+        GlobalScope.launch { populateList() }
     }
 
     private suspend fun populateList() = withContext(Dispatchers.IO) {
@@ -25,8 +22,11 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
             if (indexCursor != null) {
                 if (indexCursor!!.count > 0) {
                     while (indexCursor!!.moveToNext()) {
-                        val fmc = FamilyMembersContract()
-                        InfoActivity.motherList.add(fmc.hydrateContentData(indexCursor))
+                        val lst: MutableList<FamilyMembersContract> = mutableListOf()
+                        lst.add(FamilyMembersContract().hydrateContentData(indexCursor))
+                        withContext(Dispatchers.Main) {
+                            InfoActivity.motherList.value = lst
+                        }
                     }
                 }
             }
@@ -34,7 +34,7 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
     }
 
     private fun setContent(fmc: FamilyMemberContent? = null, kishType: Int): Cursor? {
-        val uri = Uri.parse("content://com.scans.familymem")
+        val uri = Uri.parse("content://com.scans.familymember")
         val columns = arrayOf(
                 FamilyMemberInterface.COLUMN_ID,
                 FamilyMemberInterface.COLUMN_UID,

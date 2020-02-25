@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.uen_scans_sosas.ui
 
-//import android.support.v4.content.ContextCompat.startActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +7,10 @@ import android.text.format.DateFormat
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.validatorcrawler.aliazaz.Validator
 import edu.aku.hassannaqvi.uen_scans_sosas.R
 import edu.aku.hassannaqvi.uen_scans_sosas.adapter.ChildListAdapter
 import edu.aku.hassannaqvi.uen_scans_sosas.content_provider.DataFactory
@@ -18,8 +20,6 @@ import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp.*
 import edu.aku.hassannaqvi.uen_scans_sosas.databinding.ActivityInfoBinding
 import edu.aku.hassannaqvi.uen_scans_sosas.ui.other.EndingActivity
-import edu.aku.hassannaqvi.uen_scans_sosas.validator.ValidatorClass
-import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,13 +30,14 @@ class InfoActivity : AppCompatActivity() {
     lateinit var db: DatabaseHelper
     var villageCode: String? = null
     var areaCode: String? = null
-    var adapter: ChildListAdapter? = null
+    lateinit var adapter: ChildListAdapter
 
     var flag = false
 
     companion object {
         //        lateinit var motherList: List<FamilyMembersContract>
-        lateinit var motherList: MutableList<FamilyMembersContract>
+        var motherList = MutableLiveData<MutableList<FamilyMembersContract>>()
+
         lateinit var womenList: MutableList<Pair<Int, Boolean>>
 
         fun checkingWomenExist(serial: Int): Boolean {
@@ -56,31 +57,25 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-
         womenList = ArrayList()
+        setupRecyclerView()
 
         bi.checkHH.setOnClickListener {
             if (!formValidation()) return@setOnClickListener
-            motherList = mutableListOf()
-
-            GlobalScope.launch {
-                val indexChildUpdate = async { dataClass() }
-                if (indexChildUpdate.await().let { true }) setupRecyclerView()
-            }
-
+            DataFactory(this@InfoActivity, bi.clusterNumber.text.toString(), bi.hhName.text.toString())
         }
 
+        motherList.observe(this, Observer { item ->
+            adapter.setMList(item)
+        })
+
     }
 
-    private suspend fun dataClass() = withContext(Dispatchers.IO) {
-        DataFactory(this@InfoActivity, bi.clusterNumber.text.toString(), bi.hhName.text.toString())
-    }
-
-    fun setupRecyclerView() {
-        adapter = ChildListAdapter(this@InfoActivity, motherList, true)
+    private fun setupRecyclerView() {
+        adapter = ChildListAdapter(this@InfoActivity, mutableListOf(), true)
         bi.motherList.layoutManager = LinearLayoutManager(this@InfoActivity)
         bi.motherList.adapter = adapter
-        adapter?.setItemClicked { item, position, isMother, holder ->
+        adapter.setItemClicked { item, position, isMother, holder ->
             openDialog(this@InfoActivity, item, isMother)
             itemClick = OnItemClick {
                 if (!flag) {
@@ -122,7 +117,7 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun formValidation(): Boolean {
-        return ValidatorClass.EmptyCheckingContainer(this, bi.checkLayout1)
+        return Validator.emptyCheckingContainer(this, bi.checkLayout1)
     }
 
     private fun updateDB(): Boolean {
@@ -142,10 +137,9 @@ class InfoActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (adapter == null) return
         if (womenList.size == 0) return
 
-        if (womenList.size == motherList.size) {
+        if (womenList.size == motherList.value!!.size) {
             finish()
             startActivity(Intent(this, EndingActivity::class.java).putExtra("complete", true))
             return
@@ -156,7 +150,7 @@ class InfoActivity : AppCompatActivity() {
         bi.checkLayout1.visibility = View.GONE
         bi.checkLayout2.visibility = View.GONE
 
-        adapter?.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
 
     }
 }
