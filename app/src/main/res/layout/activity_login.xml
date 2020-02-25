@@ -175,6 +175,7 @@
 </LinearLayout>
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -205,7 +206,6 @@
             android:orientation="vertical">
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -221,11 +221,27 @@
                 android:contentDescription="Aga Khan LOGO"
                 android:src="@drawable/agakhannew" />
 
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@color/transparent"
+                android:elevation="20dp"
+                android:padding="10dp"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="70dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -245,7 +261,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="182dp"
+                    android:layout_marginTop="170dp"
                     android:orientation="horizontal">
 
                     <EditText
@@ -271,7 +287,8 @@
                         android:radius="2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp">
+                        android:textSize="20sp"
+                        tools:ignore="InvalidImeActionId">
 
                         <requestFocus />
                     </EditText>
