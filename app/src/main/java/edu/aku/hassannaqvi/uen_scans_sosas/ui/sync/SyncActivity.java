@@ -43,8 +43,9 @@ import edu.aku.hassannaqvi.uen_scans_sosas.get.GetAllData;
 import edu.aku.hassannaqvi.uen_scans_sosas.otherClasses.SyncModel;
 import edu.aku.hassannaqvi.uen_scans_sosas.sync.SyncAllData;
 import edu.aku.hassannaqvi.uen_scans_sosas.sync.SyncDevice;
+import edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants;
 
-public class SyncActivity extends AppCompatActivity {
+public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDevicInterface {
     SharedPreferences.Editor editor;
     SharedPreferences sharedPref;
     String DirectoryName;
@@ -59,6 +60,7 @@ public class SyncActivity extends AppCompatActivity {
     Boolean listActivityCreated;
     Boolean uploadlistActivityCreated;
     String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
+    private boolean sync_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,31 +75,16 @@ public class SyncActivity extends AppCompatActivity {
         uploadlistActivityCreated = true;
         db = new DatabaseHelper(this);
         sharedPref = getSharedPreferences("src", MODE_PRIVATE);
-
+        sync_flag = getIntent().getBooleanExtra(Constants.SYNC_LOGIN, false);
         dbBackup();
         String txtInfo;
-
-        txtInfo =
-                "App Version: "
-                        + MainApp.appInfo.getAppVersion()
-                        + " Device Tag: "
-                        + sharedPref.getString("tagName", null);
-
-
+        txtInfo = "App Version: "
+                + MainApp.appInfo.getAppVersion()
+                + " Device Tag: "
+                + sharedPref.getString("tagName", null);
         bi.appInfo.setText(txtInfo);
-
-        bi.btnSync.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSyncDataClick();
-            }
-        });
-        bi.btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                syncServer();
-            }
-        });
+        bi.btnSync.setOnClickListener(v -> onSyncDataClick());
+        bi.btnUpload.setOnClickListener(v -> syncServer());
         setAdapter();
         setUploadAdapter();
     }
@@ -109,33 +96,10 @@ public class SyncActivity extends AppCompatActivity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            new syncData(SyncActivity.this).execute();
+            new SyncDevice(SyncActivity.this, true).execute();
         } else {
             Toast.makeText(this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void settingList() {
-        model = new SyncModel();
-        /*model.settableName("EnumBlock");
-        model.setstatus("In Progress");*/
-        model.setstatusID(0);
-        list.add(model);
-        model = new SyncModel();
-        /*model.settableName("User");
-        model.setstatus("In Progress");*/
-        model.setstatusID(0);
-        list.add(model);
-        model = new SyncModel();
-       /* model.settableName("BLRandom");
-        model.setstatus("In Progress");*/
-        model.setstatusID(0);
-        list.add(model);
-        model = new SyncModel();
-       /* model.settableName("VersionApp");
-        model.setstatus("In Progress");*/
-        model.setstatusID(0);
-        list.add(model);
     }
 
     void setAdapter() {
@@ -176,8 +140,6 @@ public class SyncActivity extends AppCompatActivity {
         if (networkInfo != null && networkInfo.isConnected()) {
 
             DatabaseHelper db = new DatabaseHelper(this);
-            //syncStatus.setText(null);
-            new SyncDevice(this).execute();
 //  *******************************************************Forms*********************************
             Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
             if (uploadlistActivityCreated) {
@@ -333,37 +295,56 @@ public class SyncActivity extends AppCompatActivity {
 
     }
 
-    public class syncData extends AsyncTask<String, String, String> {
+    @Override
+    public void processFinish(boolean flag) {
+        new SyncData(SyncActivity.this, MainApp.DIST_ID).execute(sync_flag);
+    }
+
+    private class SyncData extends AsyncTask<Boolean, String, String> {
 
         private Context mContext;
+        private String distID;
 
-        public syncData(Context mContext) {
+        private SyncData(Context mContext, String districtId) {
             this.mContext = mContext;
+            this.distID = districtId;
         }
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(Boolean... booleans) {
             runOnUiThread(() -> {
 
-                new SyncDevice(SyncActivity.this).execute();
+                if (booleans[0]) {
+                    // Getting Users
+                    if (listActivityCreated) {
+                        model = new SyncModel();
+                        model.setstatusID(0);
+                        list.add(model);
+                    }
+                    new GetAllData(mContext, "User", syncListAdapter, list).execute();
 
-//              Getting User
-                Toast.makeText(SyncActivity.this, "Sync Users", Toast.LENGTH_SHORT).show();
-                if (listActivityCreated) {
-                    model = new SyncModel();
-                    model.setstatusID(0);
-                    list.add(model);
-                }
-                new GetAllData(mContext, "Users", syncListAdapter, list).execute();
+                    // Getting App Version
+                    if (listActivityCreated) {
+                        model = new SyncModel();
+                        model.setstatusID(0);
+                        list.add(model);
+                    }
+                    new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
 
-//              Getting App Version
-                Toast.makeText(SyncActivity.this, "Sync VersionApp", Toast.LENGTH_SHORT).show();
-                if (listActivityCreated) {
-                    model = new SyncModel();
-                    model.setstatusID(0);
-                    list.add(model);
+                } else {
+
+                    //TODO: Get Member from service
+
+                    /*if (listActivityCreated) {
+                        model = new SyncModel();
+                        model.setstatusID(0);
+                        list.add(model);
+                    }
+                    new GetAllData(mContext, "EnumBlock", syncListAdapter, list).execute(distID);
+                    bi.noItem.setVisibility(View.GONE);*/
+
                 }
-                new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
+
                 listActivityCreated = false;
             });
 
@@ -372,19 +353,10 @@ public class SyncActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-
-//                    populateSpinner(mContext);
-
-                    editor.putBoolean("flag", true);
-                    editor.commit();
-
-                    dbBackup();
-
-                }
+            new Handler().postDelayed(() -> {
+                editor.putBoolean("flag", true);
+                editor.commit();
+                dbBackup();
             }, 1200);
         }
     }

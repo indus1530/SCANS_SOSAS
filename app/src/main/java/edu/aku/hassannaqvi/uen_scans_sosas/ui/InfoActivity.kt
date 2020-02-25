@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
@@ -61,6 +62,16 @@ class InfoActivity : AppCompatActivity() {
 
         bi.checkHH.setOnClickListener {
             if (!formValidation()) return@setOnClickListener
+            val cluster: Int = Integer.valueOf(bi.clusterNumber.text.toString())
+            val loginFlag = if (cluster <= 5000) {
+                !(userName == "test1234" || userName == "dmu@aku" || userName.substring(0, 4) == "user")
+            } else {
+                userName == "test1234" || userName == "dmu@aku" || userName.substring(0, 4) == "user"
+            }
+            if (!loginFlag) {
+                Toast.makeText(this, "Can't proceed test cluster for current user!!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             DataFactory(this@InfoActivity, bi.clusterNumber.text.toString(), bi.hhName.text.toString())
         }
 
@@ -116,7 +127,7 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun formValidation(): Boolean {
-        return Validator.emptyCheckingContainer(this, bi.checkLayout1)
+        return Validator.emptyCheckingContainer(this, bi.checkLayout)
     }
 
     private fun updateDB(): Boolean {
@@ -146,8 +157,7 @@ class InfoActivity : AppCompatActivity() {
 
         flag = true
 
-        bi.checkLayout1.visibility = View.GONE
-        bi.checkLayout2.visibility = View.GONE
+        bi.checkLayout.visibility = View.GONE
 
         adapter.notifyDataSetChanged()
 

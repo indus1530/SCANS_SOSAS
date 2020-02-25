@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +17,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -25,15 +26,17 @@ import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SyncDevice extends AsyncTask<Void, Integer, String> {
-    Context context;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-    private String TAG = "";
+    private SyncDevicInterface delegate;
+    private Context context;
+    private boolean flag;
+    private String TAG = SyncDevice.class.getName();
 
-    public SyncDevice(Context context) {
+    public SyncDevice(Context context, boolean flag) {
         this.context = context;
+        this.flag = flag;
 
-
+        delegate = (SyncDevicInterface) context;
+        delegate.processFinish(false);
     }
 
     @Override
@@ -65,7 +68,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
             if (HttpResult == HttpURLConnection.HTTP_OK) {
 
                 connection = (HttpURLConnection) url.openConnection();
-                JSONObject jsonObject = new JSONObject();
+                JsonObject jsonObject = new JsonObject();
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
                 connection.setInstanceFollowRedirects(false);
@@ -78,9 +81,10 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
                 DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 
                 try {
-                    jsonObject.put("imei", MainApp.IMEI);
-                    jsonObject.put("appversion", MainApp.versionName + "." + MainApp.versionCode);
-                    jsonObject.put("appname", context.getString(R.string.app_name));
+                    jsonObject.addProperty("imei", MainApp.IMEI);
+                    jsonObject.addProperty("appversion", MainApp.appInfo.getAppVersion());
+                    jsonObject.addProperty("appname", context.getString(R.string.app_name));
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -91,10 +95,10 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         connection.getInputStream(), StandardCharsets.UTF_8));
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
 
                 while ((line = br.readLine()) != null) {
-                    sb.append(line + "\n");
+                    sb.append(line).append("\n");
                 }
                 br.close();
                 System.out.println("" + sb.toString());
@@ -103,10 +107,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
                 System.out.println(connection.getResponseMessage());
                 return connection.getResponseMessage();
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-
             e.printStackTrace();
         } finally {
             if (connection != null)
@@ -119,29 +120,45 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         int sSynced = 0;
-        String sSyncedError = "";
+        StringBuilder sSyncedError = new StringBuilder();
         JSONArray json = null;
         try {
             json = new JSONArray(result);
-            for (int i = 0; i < json.length(); i++) {
-                JSONObject jsonObject = new JSONObject(json.getString(i));
-                if (!jsonObject.equals("")) {
-                    //  db.updateSyncedChildForm(jsonObject.getString("id"));  // UPDATE SYNCED
-                    String tag = jsonObject.getString("tag");
-                    sharedPref = context.getSharedPreferences("tagName", MODE_PRIVATE);
-                    editor = sharedPref.edit();
-                    editor.putString("tagName", tag);
-                    editor.commit();
-                } else if (jsonObject.getString("status").equals("0") && jsonObject.getString("error").equals("1")) {
-                } else {
-                    sSyncedError += "\nError:This device is not found on server.";
+            if (json.length() > 0) {
+                for (int i = 0; i < json.length(); i++) {
+                    JSONObject jsonObject = new JSONObject(json.getString(i));
+                    if (!jsonObject.equals("")) {
+                        String tag = jsonObject.getString("tag");
+                        SharedPreferences sharedPref = context.getSharedPreferences("tagName", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("tagName", tag);
+                        editor.apply();
+
+                        if (flag) {
+                            delegate.processFinish(true);
+                        }
+
+                    } else if (jsonObject.getString("status").equals("0") && jsonObject.getString("error").equals("1")) {
+                    } else {
+                        sSyncedError.append("\nError:This device is not found on server.");
+                    }
+                }
+            } else {
+                if (flag) {
+                    delegate.processFinish(true);
                 }
             }
-//            Toast.makeText(context,  " synced: " + sSynced + "\r\n\r\n Errors: " + sSyncedError, Toast.LENGTH_SHORT).show();
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Failed to get TAG ID " + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Failed to get TAG ID " + result, Toast.LENGTH_SHORT).show();
+            if (flag) {
+                delegate.processFinish(true);
+            }
         }
+    }
+
+    public interface SyncDevicInterface {
+        void processFinish(boolean flag);
     }
 }
