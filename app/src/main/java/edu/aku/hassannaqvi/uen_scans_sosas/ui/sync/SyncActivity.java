@@ -282,9 +282,9 @@ public class SyncActivity extends AppCompatActivity {
 
             String dt = sharedPref.getString("dt", new SimpleDateFormat("dd-MM-yy").format(new Date()));
 
-            if (dt != new SimpleDateFormat("dd-MM-yy").format(new Date())) {
+            if (!dt.equals(new SimpleDateFormat("dd-MM-yy").format(new Date()))) {
                 editor.putString("dt", new SimpleDateFormat("dd-MM-yy").format(new Date()));
-                editor.commit();
+                editor.apply();
             }
 
             File folder = new File(Environment.getExternalStorageDirectory() + File.separator + DatabaseHelper.PROJECT_NAME);
@@ -343,72 +343,29 @@ public class SyncActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            runOnUiThread(new Runnable() {
+            runOnUiThread(() -> {
 
-
-                @Override
-                public void run() {
-
-                    new SyncDevice(SyncActivity.this).execute();
-
-                    /*Toast.makeText(SyncActivity.this, "Sync Talukas", Toast.LENGTH_SHORT).show();
-
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "Talukas", syncListAdapter, list).execute();
-                    bi.noItem.setVisibility(View.GONE);
-
-//                  getting UCs!!
-                    Toast.makeText(SyncActivity.this, "Sync UCs", Toast.LENGTH_SHORT).show();
-
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "UCs", syncListAdapter, list).execute();
-
-//                   getting Areas
-                    Toast.makeText(SyncActivity.this, "Sync Areas", Toast.LENGTH_SHORT).show();
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "Areas", syncListAdapter, list).execute();
-
-//                   getting Villages
-                    Toast.makeText(SyncActivity.this, "Sync Villages", Toast.LENGTH_SHORT).show();
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "Villages", syncListAdapter, list).execute();*/
+                new SyncDevice(SyncActivity.this).execute();
 
 //                   getting User
-                    Toast.makeText(SyncActivity.this, "Sync Users", Toast.LENGTH_SHORT).show();
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "Users", syncListAdapter, list).execute();
+                Toast.makeText(SyncActivity.this, "Sync Users", Toast.LENGTH_SHORT).show();
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
+                }
+                new GetAllData(mContext, "Users", syncListAdapter, list).execute();
 
 //                    Getting App Version
-                    Toast.makeText(SyncActivity.this, "Sync VersionApp", Toast.LENGTH_SHORT).show();
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
-//                    new GetAllData(mContext, "FamilyMembers").execute();
-                    listActivityCreated = false;
+                Toast.makeText(SyncActivity.this, "Sync VersionApp", Toast.LENGTH_SHORT).show();
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
                 }
+                new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
+//                    new GetAllData(mContext, "FamilyMembers").execute();
+                listActivityCreated = false;
             });
 
             return null;

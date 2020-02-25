@@ -7,9 +7,12 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -116,26 +119,31 @@ public class GetAllData extends AsyncTask<String, String, String> {
             urlConnection.setReadTimeout(100000 /* milliseconds */);
             urlConnection.setConnectTimeout(150000 /* milliseconds */);
 
-/*            urlConnection.setRequestMethod("POST");
-            urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestProperty("charset", "utf-8");
-            urlConnection.setUseCaches(false);
+            switch (syncClass) {
+                case "Users":
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setDoInput(true);
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setRequestProperty("charset", "utf-8");
+                    urlConnection.setUseCaches(false);
 
-            // Starts the query
-            urlConnection.connect();
-            DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
-            JSONObject json = new JSONObject();
-            try {
-                json.put("user", "test1234");
-            } catch (JSONException e1) {
-                e1.printStackTrace();
+                    // Starts the query
+                    urlConnection.connect();
+                    DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("user", "test1234");
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                    Log.d(TAG, "downloadUrl: " + json.toString());
+                    wr.writeBytes(json.toString());
+                    wr.flush();
+                    wr.close();
+                    break;
+
             }
-            Log.d(TAG, "downloadUrl: " + json.toString());
-            wr.writeBytes(json.toString());
-            wr.flush();
-            wr.close();*/
 
 
             Log.d(TAG, "doInBackground: " + urlConnection.getResponseCode());
@@ -152,9 +160,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     result.append(line);
                 }
             }
-        } catch (java.net.SocketTimeoutException e) {
-            return null;
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             return null;
         } finally {
             urlConnection.disconnect();

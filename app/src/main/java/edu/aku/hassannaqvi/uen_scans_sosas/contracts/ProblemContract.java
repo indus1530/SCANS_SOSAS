@@ -176,7 +176,7 @@ public class ProblemContract {
 
     public static abstract class singleProblem implements BaseColumns {
 
-        public static final String TABLE_NAME = "problem";
+        public static final String TABLE_NAME = "sProblem";
         public static final String _ID = "_id";
         public static final String COLUMN_UID = "_uid";
         public static final String COLUMN_UUID = "_uuid";
