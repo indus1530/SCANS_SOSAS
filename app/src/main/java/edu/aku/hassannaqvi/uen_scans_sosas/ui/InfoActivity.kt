@@ -72,6 +72,7 @@ class InfoActivity : AppCompatActivity() {
                 Toast.makeText(this, "Can't proceed test cluster for current user!!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            bi.motherList.visibility = View.VISIBLE
             DataFactory(this@InfoActivity, bi.clusterNumber.text.toString(), bi.hhName.text.toString())
         }
 
