@@ -95,9 +95,9 @@
 
     <string name="td12"> بچے کا کس قسم کا علاج کیا گیا ؟ </string>
     <string name="td12a"> نہیں، کوئی جراحی علاج نہیں </string>
-    <string name="td12b"> جراحی - جسمانی بڑا آپریشن </string>
-    <!--    <string name="td12c"> صرف دوائی دی گئی </string>-->
-    <string name="td12c"> دیگر علاج، مرہم پٹی، ٹاںکے، دوائی لگانا وغیرہ </string>
+    <string name="td12b"> صرف دوائی دی گئی </string>
+    <string name="td12c"> جراحی - جسمانی بڑا آپریشن </string>
+    <string name="td12d"> دیگر علاج، مرہم پٹی، ٹاںکے، دوائی لگانا وغیرہ </string>
     <string name="td12other"> دیگر وضاحت کریں </string>
 
     <string name="td13"> کون سے اسباب تھے جن کی وجہ سے بچے کو کسی ہسپتال یا معالج کے پاس ڈاکٹر یا نرس سے اس کا آپریشن یا مرہم پٹی نہیں کروائ گئی ؟ </string>
