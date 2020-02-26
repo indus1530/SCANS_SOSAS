@@ -452,9 +452,16 @@
                             android:text="@string/td12c" />
 
                         <RadioButton
-                            android:id="@+id/td12d"
+                            android:id="@+id/td1296"
                             style="@style/radiobutton"
-                            android:text="@string/td12d" />
+                            android:text="@string/other" />
+
+                        <EditText
+                            android:id="@+id/td1296x"
+                            style="@style/EditTextAlpha"
+                            android:hint="@string/specify"
+                            android:text='@{td1296.checked? td1296x.getText().toString() : ""}'
+                            android:visibility='@{td1296.checked? View.VISIBLE : View.GONE}' />
 
                     </RadioGroup>
 
@@ -514,7 +521,7 @@
 
                         <EditText
                             android:id="@+id/td1396x"
-                            style="@style/EditTextAlphaNumeric"
+                            style="@style/EditTextAlpha"
                             android:hint="@string/specify"
                             android:text='@{td1396.checked? td1396x.getText().toString() : ""}'
                             android:visibility='@{td1396.checked? View.VISIBLE : View.GONE}' />
