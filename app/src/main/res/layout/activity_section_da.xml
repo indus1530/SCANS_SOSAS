@@ -27,8 +27,6 @@
 
             <TextView
                 style="@style/HeadingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/tdhh" />
 
             <!--Edit Text Td03-->
@@ -69,8 +67,20 @@
                     <TextView
                         style="@style/i_textview"
                         android:layout_width="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:text="@string/td04" />
+
+                    <com.edittextpicker.aliazaz.EditTextPicker
+                        android:id="@+id/td04dd"
+                        style="@style/EditTextNum"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="@string/td04dd"
+                        android:maxLength="2"
+                        app:maxValue="30"
+                        app:minValue="0"
+                        app:required="true"
+                        app:type="range" />
 
                     <com.edittextpicker.aliazaz.EditTextPicker
                         android:id="@+id/td04mm"
@@ -90,8 +100,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:hint="@string/td04yy"
-                        android:maxLength="1"
-                        app:maxValue="5"
+                        android:maxLength="2"
+                        app:maxValue="19"
                         app:minValue="0"
                         app:required="true"
                         app:type="range"/>
