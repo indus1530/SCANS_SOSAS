@@ -77,14 +77,14 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
 
         val whereClause: String
         val whereArgs: Array<String>
-        if (kishType == 2) {
-            whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
-                    + FamilyMemberInterface.COLUMN_MOTHER_SERIAL + "=? AND " + FamilyMemberInterface.COLUMN_UUID + "=? AND " + FamilyMemberInterface.COLUMN_MOTHER_NAME + "=?")
-            whereArgs = arrayOf(cluster_no, hhno, fmc!!.serialno, fmc.uuid, fmc.name)
-        } else {
+        if (kishType == 1) {
             whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
                     + FamilyMemberInterface.COLUMN_KISH_SELECTED + "=? ")
             whereArgs = arrayOf(cluster_no, hhno, kishType.toString())
+        } else {
+            whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
+                    + FamilyMemberInterface.COLUMN_MOTHER_SERIAL + "=? AND " + FamilyMemberInterface.COLUMN_UUID + "=? AND " + FamilyMemberInterface.COLUMN_MOTHER_NAME + "=? AND (" + FamilyMemberInterface.COLUMN_AGE + " IN (5,6,7,8,9))")
+            whereArgs = arrayOf(cluster_no, hhno, fmc!!.serialno, fmc.uuid, fmc.name)
         }
         val orderBy = "${FamilyMemberInterface.COLUMN_ID} ASC"
 
