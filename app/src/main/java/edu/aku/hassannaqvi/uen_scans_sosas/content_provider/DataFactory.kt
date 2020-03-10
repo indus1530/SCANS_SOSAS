@@ -84,10 +84,11 @@ class DataFactory(private val context: Context, private val cluster_no: String, 
         } else {
             whereClause = (FamilyMemberInterface.COLUMN_CLUSTERNO + "=? AND " + FamilyMemberInterface.COLUMN_HHNO + "=? AND "
                     + FamilyMemberInterface.COLUMN_MOTHER_SERIAL + "=? AND " + FamilyMemberInterface.COLUMN_UUID + "=? AND "
-                    + FamilyMemberInterface.COLUMN_MOTHER_NAME + "=? AND (" + FamilyMemberInterface.COLUMN_AGE + " IN (5,6,7,8,9))")
+                    + FamilyMemberInterface.COLUMN_MOTHER_NAME + "=? "
+                    + "AND CAST(" + FamilyMemberInterface.COLUMN_AGE + " AS Integer)>= 5 AND CAST(" + FamilyMemberInterface.COLUMN_AGE + "  AS Integer)< 10")
             whereArgs = arrayOf(cluster_no, hhno, fmc!!.serialno, fmc.uuid, fmc.name)
         }
-        val orderBy = "${FamilyMemberInterface.COLUMN_ID} ASC"
+        val orderBy = "${FamilyMemberInterface.COLUMN_ID} DESC"
 
         val resolver = context.contentResolver
 
