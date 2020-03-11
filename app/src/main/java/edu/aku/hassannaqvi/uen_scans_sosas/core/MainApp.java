@@ -23,11 +23,7 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,6 +86,7 @@ public class MainApp extends Application {
     public static MotherContract mc;
     public static ChildContract cc;
     public static String userName = "0000";
+    public static Boolean wrapperFlag = false;
     public static String DIST_ID;
 
     public static void setItemClick(OnItemClick itemClick) {
@@ -189,43 +186,6 @@ public class MainApp extends Application {
     public static String villageCode;
     protected static LocationManager locationManager;
 
-
-    public static int monthsBetweenDates(Date startDate, Date endDate) {
-
-        Calendar start = Calendar.getInstance();
-        start.setTime(startDate);
-
-        Calendar end = Calendar.getInstance();
-        end.setTime(endDate);
-
-        int monthsBetween = 0;
-        int dateDiff = end.get(Calendar.DAY_OF_MONTH) - start.get(Calendar.DAY_OF_MONTH);
-
-        if (dateDiff < 0) {
-            int borrrow = end.getActualMaximum(Calendar.DAY_OF_MONTH);
-            dateDiff = (end.get(Calendar.DAY_OF_MONTH) + borrrow) - start.get(Calendar.DAY_OF_MONTH);
-            monthsBetween--;
-
-            if (dateDiff > 0) {
-                monthsBetween++;
-            }
-        }
-
-        monthsBetween += end.get(Calendar.MONTH) - start.get(Calendar.MONTH);
-        monthsBetween += (end.get(Calendar.YEAR) - start.get(Calendar.YEAR)) * 12;
-        return monthsBetween;
-    }
-
-//    public static long ageInMonthsByDOB(String dateStr) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        Calendar cal = getCalendarDate(dateStr);
-//        Date dob = cal.getTime();
-//        Date today = new Date();
-//        Long diff = today.getTime() - dob.getTime();
-//        long ageInMonths = (diff / (24 * 60 * 60 * 1000)) / 30;
-//        return ageInMonths;
-//    }
-
     public static void setGPS(Activity activity) {
         SharedPreferences GPSPref = activity.getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
 
@@ -258,52 +218,6 @@ public class MainApp extends Application {
         }
 
 
-    }
-
-    public static long ageInMonths(String year, String month) {
-        long ageInMonths = (Integer.valueOf(year) * 12) + Integer.valueOf(month);
-        return ageInMonths;
-    }
-
-    public static void errorCheck(final Context context, String error) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-        alertDialogBuilder
-                .setMessage(error)
-                .setCancelable(false)
-                .setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                dialog.cancel();
-                            }
-                        });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
-    }
-
-    public static void errorCountDialog(final Context context, final Activity activity, String error) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-        alertDialogBuilder
-                .setMessage(error)
-                .setCancelable(false)
-                .setPositiveButton("Discard",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-//                                MainApp.memFlag--;
-                                activity.finish();
-                            }
-                        });
-        alertDialogBuilder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
     }
 
     public static void finishActivity(final Context context, final Activity activity) {
@@ -353,36 +267,6 @@ public class MainApp extends Application {
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-    }
-
-    public static String convertDateFormat(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date d = sdf.parse(dateStr);
-            return new SimpleDateFormat("dd/MM/yyyy").format(d);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        return "";
-    }
-
-    public static Boolean LHWExist(String lhwCode, String villageCode) {
-        Log.d(TAG, "LHWExist: " + lhwCode + " - villagecode " + villageCode);
-
-
-        MainApp.hh03txt = Integer.valueOf(sharedPref.getString(lhwCode, "0"));
-        Log.d(TAG, "LHWExist (Test): " + sharedPref.getString(lhwCode, "0"));
-
-        if (MainApp.hh03txt == 0) {
-            Log.d(TAG, "LHWExist (False): " + MainApp.hh03txt);
-
-            return false;
-        } else {
-            Log.d(TAG, "LHWExist (True): " + MainApp.hh03txt);
-
-            return true;
-        }
     }
 
     public static void openCountDialog(Context context, int count) {
@@ -448,9 +332,7 @@ public class MainApp extends Application {
         super.onCreate();
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/MBLateefi.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
-        deviceId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-
+        deviceId = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         // Requires Permission for GPS -- android.permission.ACCESS_FINE_LOCATION
         // Requires Additional permission for 5.0 -- android.hardware.location.gps
@@ -473,10 +355,13 @@ public class MainApp extends Application {
 
         );
 
-
-//        Initialize Dead Member List
-//        deadMembers = new ArrayList<String>();
         sharedPref = getSharedPreferences("PSUCodes", Context.MODE_PRIVATE);
+
+        //Initialize InfoClass
+        MainApp.appInfo = new AppInfo(this);
+        MainApp.versionCode = MainApp.appInfo.getVersionCode();
+        MainApp.versionName = MainApp.appInfo.getVersionName();
+
     }
 
     protected void showCurrentLocation() {
@@ -552,30 +437,6 @@ public class MainApp extends Application {
             return provider2 == null;
         }
         return provider1.equals(provider2);
-    }
-
-    public static class deadMemberClass {
-
-        int position;
-        String DSSId;
-
-        public deadMemberClass(int i, String s) {
-            position = i;
-            DSSId = s;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-
-        public void setPosition(int i) {
-            position = i;
-        }
-
-        public void setDSSId(String id) {
-            DSSId = id;
-        }
-
     }
 
     public class GPSLocationListener implements LocationListener {

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import edu.aku.hassannaqvi.uen_scans_sosas.R;
+import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 
 
 /**
@@ -90,33 +91,35 @@ public class SplashscreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_splashscreen);
+
+        // Fetching data from wrapper activity
+        Bundle bundle_data = getIntent().getExtras();
+        if (bundle_data != null) {
+            String username = bundle_data.getString("username_from_wrapper");
+            if (username != null) {
+                MainApp.userName = username;
+                MainApp.admin = username.contains("@");
+                MainApp.wrapperFlag = true;
+            }
+        }
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashscreenActivity.this, LoginActivity.class);
-                //     Intent i = new Intent(SplashscreenActivity.this, F4Section01Activity.class);
-                toggle();
-                startActivity(i);
-
-                // close this activity
-                finish();
-            }
-        }, SPLASH_TIME_OUT);
+        /*
+         * Showing splash screen with a timer. This will be useful when you
+         * want to show case your app logo / company
+         */
+        new Handler().postDelayed(() -> {
+            // This method will be executed once the timer is over
+            // Start your app main activity
+            Intent i = new Intent(SplashscreenActivity.this, MainApp.wrapperFlag ? MainActivity.class : LoginActivity.class);
+            toggle();
+            finish();
+            startActivity(i);
+        }, MainApp.wrapperFlag ? SPLASH_TIME_OUT % 2 : SPLASH_TIME_OUT);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +133,7 @@ public class SplashscreenActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
     }
 
     @Override
