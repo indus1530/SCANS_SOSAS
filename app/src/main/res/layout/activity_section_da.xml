@@ -77,7 +77,7 @@
                         android:layout_weight="1"
                         android:hint="@string/td04dd"
                         android:maxLength="2"
-                        app:maxValue="30"
+                        app:maxValue="29"
                         app:minValue="0"
                         app:required="true"
                         app:type="range" />
@@ -100,10 +100,10 @@
                         style="@style/EditTextNum"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:maxLength="2"
+                        android:maxLength="1"
                         android:hint="@string/td04yy"
                         android:textDirection="ltr"
-                        app:maxValue="99"
+                        app:maxValue="5"
                         app:minValue="0"
                         app:required="true"
                         app:type="range"/>

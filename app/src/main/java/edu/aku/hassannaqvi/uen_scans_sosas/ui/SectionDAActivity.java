@@ -269,14 +269,14 @@ public class SectionDAActivity extends AppCompatActivity {
         if (!ValidatorClass.EmptyCheckingContainer(this, bi.ll02)) {
             return false;
         }
-        if (Integer.parseInt(bi.td04mm.getText().toString()) == 0 && Integer.parseInt(bi.td04yy.getText().toString()) == 0) {
-            bi.td04mm.setError("Both can not be 0 at the same time");
-            bi.td04yy.setError("Both can not be 0 at the same time");
-            bi.td04mm.requestFocus();
-            bi.td04yy.requestFocus();
+        if (Integer.parseInt(bi.td04dd.getText().toString()) == 0 && Integer.parseInt(bi.td04mm.getText().toString()) == 0 && Integer.parseInt(bi.td04yy.getText().toString()) == 0) {
+            bi.td04dd.setError("All cannot be 0 at the same time");
+            bi.td04mm.setError("All cannot be 0 at the same time");
+            bi.td04yy.setError("All cannot be 0 at the same time");
+            bi.td04dd.requestFocus();
             return false;
-        } else if (Integer.parseInt(bi.td04yy.getText().toString()) == 5 && Integer.parseInt(bi.td04mm.getText().toString()) > 0) {
-            bi.td04mm.setError("Month can not greater than 0");
+        } else if (Integer.parseInt(bi.td04yy.getText().toString()) == 5 && (Integer.parseInt(bi.td04mm.getText().toString()) > 0 || Integer.parseInt(bi.td04dd.getText().toString()) > 0)) {
+            bi.td04mm.setError("Month and Days cannot be greater then 0!!");
             bi.td04mm.requestFocus();
             return false;
         }
