@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.uen_scans_sosas.ui.other;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import edu.aku.hassannaqvi.uen_scans_sosas.validator.ValidatorClass;
 public class EndingActivity extends AppCompatActivity {
 
     ActivityEndingBinding bi;
-
+    private int PhotoSerial;
     String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
 
     @Override
@@ -27,7 +28,7 @@ public class EndingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_ending);
         bi.setCallback(this);
-
+        PhotoSerial = 1;
         boolean check = getIntent().getExtras().getBoolean("complete");
 
         if (check) {
@@ -84,6 +85,42 @@ public class EndingActivity extends AppCompatActivity {
         return ValidatorClass.EmptyCheckingContainer(this, bi.llend);
     }
 
+    public void takePhoto(View view) {
+
+        Intent intent = new Intent(this, TakePhoto.class);
+
+        // Adjust Identification Information to uniquely identify every photo and link to form
+        //intent.putExtra("picID", MainApp.fc.getClusterCode() + "_" + MainApp.fc.getHhno() + "_" + MainApp.childData.getName()+ "_" + PhotoSerial);
+        intent.putExtra("picID", "901001" + "_" + "A-0001-001" + "_" + "1" + "_" + PhotoSerial);
+
+        // Provide information for which photo is being taken like ChildName
+        //intent.putExtra("forInfo", MainApp.childData.getName());
+        intent.putExtra("forInfo", "This Household");
+
+        if (view.getId() == bi.btnPhoto.getId()) {
+            intent.putExtra("picView", "Child".toUpperCase());
+            startActivityForResult(intent, 1); // Activity is started with requestCode 1 = Front
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        // Toast.makeText(this, requestCode + "_" + resultCode, Toast.LENGTH_SHORT).show();
+        if (resultCode == 1) {
+            Toast.makeText(this, "Photo Taken", Toast.LENGTH_SHORT).show();
+
+            String fileName = data.getStringExtra("FileName");
+            PhotoSerial++;
+
+            bi.fileName.setText(bi.fileName.getText() + String.valueOf(PhotoSerial) + " - " + fileName + ";\r\n");
+        } else {
+            Toast.makeText(this, "Photo Cancelled", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onBackPressed() {

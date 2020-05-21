@@ -89,4 +89,9 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+    // Take Photo
+    implementation 'id.zelory:compressor:2.1.0'
+
+
 }

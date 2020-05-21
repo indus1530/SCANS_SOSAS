@@ -26,18 +26,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/HeadingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/dcstatus" />
-
             <LinearLayout
                 android:id="@+id/llend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <!-- Take Photo   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtakePhoto"
+                    style="@style/cardView">
 
+                    <LinearLayout android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/labels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dcstatus" />
+
+                            <Button
+                                android:id="@+id/btnPhoto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="12dp"
+
+                                android:onClick="takePhoto"
+                                android:text="Take a photo"
+                                android:drawableStart="@drawable/camera"
+                                android:drawablePadding="8dp"
+                            />
+
+                            <EditText
+                                android:id="@+id/fileName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="12dp"
+                                android:textColor="#7f7f7f7f"
+                                android:enabled="false"
+                                android:textSize="14dp" />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
                 <!--RS9-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/RS9cv"
@@ -49,7 +82,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/textInput"
+                            style="@style/labels"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/dcstatus" />

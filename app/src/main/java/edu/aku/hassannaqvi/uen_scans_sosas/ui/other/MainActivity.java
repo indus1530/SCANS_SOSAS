@@ -401,11 +401,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(oF);
     }
 
+    public void openEnd(View v) {
+        Intent oF = new Intent(MainActivity.this, EndingActivity.class);
+        oF.putExtra("complete", false);
+        startActivity(oF);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(broadcastReceiver);
     }
+
+
 
     public static class MyDialogFragment extends DialogFragment {
 
