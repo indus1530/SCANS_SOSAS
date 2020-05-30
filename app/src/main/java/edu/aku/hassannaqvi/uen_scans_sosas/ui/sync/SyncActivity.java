@@ -83,6 +83,7 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
                 + " Device Tag: "
                 + sharedPref.getString("tagName", null);
         bi.appInfo.setText(txtInfo);
+
         bi.btnSync.setOnClickListener(v -> onSyncDataClick());
         bi.btnUpload.setOnClickListener(v -> syncServer());
         setAdapter();
