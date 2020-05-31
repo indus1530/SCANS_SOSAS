@@ -8,6 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,6 +18,7 @@ import edu.aku.hassannaqvi.uen_scans_sosas.R;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper;
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 import edu.aku.hassannaqvi.uen_scans_sosas.databinding.ActivityEndingBinding;
+import edu.aku.hassannaqvi.uen_scans_sosas.utils.JSONUtils;
 import edu.aku.hassannaqvi.uen_scans_sosas.validator.ValidatorClass;
 
 public class EndingActivity extends AppCompatActivity {
@@ -54,7 +58,11 @@ public class EndingActivity extends AppCompatActivity {
 
     public void BtnContinue() {
         if (formValidation()) {
-            SaveDraft();
+            try {
+                SaveDraft();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             if (UpdateDB()) {
                 finish();
                 startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -64,7 +72,7 @@ public class EndingActivity extends AppCompatActivity {
         }
     }
 
-    private void SaveDraft() {
+    private void SaveDraft() throws JSONException {
         MainApp.fc.setIstatus(
                 bi.istatus1.isChecked() ? "1" :
                         bi.istatus2.isChecked() ? "2" :
@@ -73,6 +81,20 @@ public class EndingActivity extends AppCompatActivity {
                                                 bi.istatus5.isChecked() ? "5"
                                                         : "0");
         MainApp.fc.setEndingdatetime(dtToday);
+
+        JSONObject json = new JSONObject();
+
+        json.put("fileName", bi.fileName.getText().toString());
+
+        try {
+            JSONObject json_merge = JSONUtils.mergeJSONObjects(new JSONObject(MainApp.fc.getsA()), json);
+
+            MainApp.fc.setsA(String.valueOf(json_merge));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private boolean UpdateDB() {
@@ -91,11 +113,11 @@ public class EndingActivity extends AppCompatActivity {
 
         // Adjust Identification Information to uniquely identify every photo and link to form
         //intent.putExtra("picID", MainApp.fc.getClusterCode() + "_" + MainApp.fc.getHhno() + "_" + MainApp.childData.getName()+ "_" + PhotoSerial);
-        intent.putExtra("picID", "901001" + "_" + "A-0001-001" + "_" + "1" + "_" + PhotoSerial);
+        intent.putExtra("picID", MainApp.fc.getClusterCode() + "_" + MainApp.fc.getHhno() + "_" + "1" + "_" + PhotoSerial);
 
         // Provide information for which photo is being taken like ChildName
-        //intent.putExtra("forInfo", MainApp.childData.getName());
-        intent.putExtra("forInfo", "This Household");
+        intent.putExtra("forInfo", MainApp.childData.getName());
+//        intent.putExtra("forInfo", "This Household");
 
         if (view.getId() == bi.btnPhoto.getId()) {
             intent.putExtra("picView", "Child".toUpperCase());

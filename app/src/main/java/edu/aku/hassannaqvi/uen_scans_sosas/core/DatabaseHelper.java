@@ -1425,6 +1425,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        values.put(FormsTable.COLUMN_NEXT_VISIT, MainApp.fc.getNextVisit());
 //        values.put(FormsTable.COLUMN_STATUS, MainApp.fc.getStatus());
         values.put(FormsTable.COLUMN_ENDINGDATETIME, MainApp.fc.getEndingdatetime());
+        values.put(FormsTable.COLUMN_SA, MainApp.fc.getsA());
 
 
 // Which row to update, based on the ID
