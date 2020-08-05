@@ -23,7 +23,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 import edu.aku.hassannaqvi.uen_scans_sosas.core.MainApp;
 
 import static edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper.PROJECT_NAME;
@@ -198,6 +197,7 @@ public class SyncAllPhotos extends AsyncTask<Void, Integer, String> {
                 pd.show();
                 moveFile(fileName);
 
+
             } else if (jsonObject.getString("status").equals("2") && jsonObject.getString("error").equals("0")) {
 
                 pd.setMessage("Duplicate Photo: " + fileName);
@@ -263,4 +263,6 @@ public class SyncAllPhotos extends AsyncTask<Void, Integer, String> {
         }
 
     }
+
+
 }

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,8 +43,11 @@ import edu.aku.hassannaqvi.uen_scans_sosas.databinding.ActivitySyncBinding;
 import edu.aku.hassannaqvi.uen_scans_sosas.get.GetAllData;
 import edu.aku.hassannaqvi.uen_scans_sosas.otherClasses.SyncModel;
 import edu.aku.hassannaqvi.uen_scans_sosas.sync.SyncAllData;
+import edu.aku.hassannaqvi.uen_scans_sosas.sync.SyncAllPhotos;
 import edu.aku.hassannaqvi.uen_scans_sosas.sync.SyncDevice;
 import edu.aku.hassannaqvi.uen_scans_sosas.utils.Constants;
+
+import static edu.aku.hassannaqvi.uen_scans_sosas.core.DatabaseHelper.PROJECT_NAME;
 
 public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDevicInterface {
     SharedPreferences.Editor editor;
@@ -237,6 +241,55 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
 
     }
 
+
+    public void uploadPhotos(View view) {
+
+        String fileName = "";
+        String appFolder = PROJECT_NAME;
+
+        File sdDir = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        Log.d("Files", "Path: " + sdDir);
+        File directory = new File(String.valueOf(sdDir), appFolder);
+        Log.d("Directory", "uploadPhotos: " + directory);
+        if (directory.exists()) {
+            File[] files = directory.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File file) {
+                    return (file.getPath().endsWith(".jpg") || file.getPath().endsWith(".jpeg"));
+                }
+            });
+
+
+            Log.d("Files", "Count: " + files.length);
+
+            if (files.length > 0) {
+
+                for (int i = 0; i < 10; i++) {
+
+                    SyncAllPhotos syncAllPhotos = new SyncAllPhotos(files[i].getName(), this);
+                    syncAllPhotos.execute();
+
+                    try {
+                        //3000 ms delay to process upload of next file.
+                        Thread.sleep(3200);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+
+                    }
+                }
+            } else {
+                Toast.makeText(this, "No photos to upload.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "No photos were taken", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     public void dbBackup() {
         sharedPref = getSharedPreferences("src", MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -250,7 +303,7 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
                 editor.apply();
             }
 
-            File folder = new File(Environment.getExternalStorageDirectory() + File.separator + DatabaseHelper.PROJECT_NAME);
+            File folder = new File(Environment.getExternalStorageDirectory() + File.separator + PROJECT_NAME);
             boolean success = true;
             if (!folder.exists()) {
                 success = folder.mkdirs();
